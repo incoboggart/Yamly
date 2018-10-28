@@ -1,10 +1,10 @@
-#General
+# General
 Yamly is development pipeline plugin for Unity3d.
 It allows using yaml or json text files for editing game data throug development and use that data without runtime overhead for parsing yaml/json in runtime.
 Yamly parse all the text in edit time, validates syntax and converts all the data into scriptable object storages for runtime access.
 To make data accessible Yamly generates code in edit time, so no reflection or il emit is performed at runtime. 
 
-##Do i need this?
+## Do i need this?
 There are several main problems Yamly can help you with:
 - Long and hazy VCS updates (every time i need to fix one number i have to download VCS update, open Unity, wait LOTS of time until Unity imports all changed textures, meshes, code etc, find right asset, change one number and commit it back.)
 - Simultaneous work (every time i work on data with my colleague, we cant do it on the same time because of the merge conflicts - we make copies of scriptable objects and then move changes between copies manually or lose our changes and reapply them. We make errors in the process and so on...)
@@ -15,21 +15,21 @@ This does not mean, that Yamly wont help you.
 But its main goal - simplify handling lots of data by using text as data source.
 And this plugin requires coding due to code first approach.
 
-##Typycal use cases.
+## Typycal use cases.
 Single text file for code constants or quick options.
 Multiple text files, defining inventory items database, one item per file.
 
 In general - any case where you need some plain data (without direct asset referencing) will do.
 
-##Installation
+## Installation
 Just extract asset package anywhere in your project.
 Yamly is tolerant on moving its assets around, so you can change default location freely.
 
-#Compatibility  
+# Compatibility  
 Yamly requires your project to use .NET 4 equivalent scripting runtime version and API compatibility version.
 No reflection used in runtime so no special requirements on code stripping level or scripting backend. 
 
-##How to get started?
+## How to get started?
 To get started you need to do the following:
 * Define your C# class and decorate it with Yamly asset attributes.  
 Yamly is using attributes to detect types, defining data structure.
@@ -56,7 +56,7 @@ Data storage is runtime asset, storing converted data and used to access it.
 By default any data storage contains all asset groups. This behaviour can be ajusted through storage inspector.
 Storages provide methods to access stored data by group name.
 
-#Important limitations and requirements.
+# Important limitations and requirements.
 * Code first  
 Yamly is using a code first approach. This means data structure is defined via C# code.
 To make Yamly process some data type it have to be decorated with Yamly asset attribute.
@@ -76,7 +76,7 @@ Yamly does not provide reference counting mechanics. This means same data in dif
 Asset group names must be unique between all groups.
 Asset group names must be valid code identifiers, though the can contain whitespaces and - for convinience (the replaced to _ in code). 
 
-##Sample code:
+## Sample code:
 Declare type and decorate with asset attributes:
 ```
 [SingleAsset("MyData")] // Will appear only in single source
