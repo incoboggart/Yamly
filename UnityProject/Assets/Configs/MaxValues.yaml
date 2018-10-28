@@ -1,0 +1,81 @@
+id: MaxValues
+byte: 255
+nByte: 255
+byteArray: [255]
+byteList: [255]
+byteDictionary: {value: 255}
+
+sByte: 127
+nSByte: 127
+sByteArray: [127]
+sByteList: [127]
+sByteDictionary: {value: 127}
+
+short: -32768
+nShort: -32768
+shortArray: [-32768]
+shortList: [-32768]
+shortDictionary: {value: -32768}
+
+uShort: 65535
+nUShort: 65535
+uShortArray: [65535]
+uShortList: [65535]
+uShortDictionary: {value: 65535}
+
+int: 2147483647
+nInt: 2147483647
+intArray: [2147483647]
+intList: [2147483647]
+intDictionary: {value: 2147483647}
+
+uInt: 4294967295
+nUInt: 4294967295
+uIntArray: [4294967295]
+uIntList: [4294967295]
+uIntDictionary: {value: 4294967295}
+
+long: 9223372036854775807
+nLong: 9223372036854775807
+longArray: [9223372036854775807]
+longList: [9223372036854775807]
+longDictionary: {value: 9223372036854775807}
+
+uLong: 18446744073709551615
+nULong: 18446744073709551615
+uLongArray: [18446744073709551615]
+uLongList: [18446744073709551615]
+uLongDictionary: {value: 18446744073709551615}
+
+float: 3.402823E+38
+nFloat: 3.402823E+38
+floatArray: [3.402823E+38]
+floatList: [3.402823E+38]
+floatDictionary: {value: 3.402823E+38}
+
+double: 1.79769313486232E+307
+nDouble: 1.79769313486232E+307
+doubleArray: [1.79769313486232E+307]
+doubleList: [1.79769313486232E+307]
+doubleDictionary: {value: 1.79769313486232E+307}
+
+string: max
+stringsArray: [max]
+stringsList: [max]
+stringDictionary: {value: max}
+
+class: {id: max}
+classArray: [{id: max}]
+classList: [{id: max}]
+classDictionary: {value: {id: max}}
+
+struct: {id: 2147483647}
+structArray: [{id: 2147483647}]
+structList: [{id: 2147483647}]
+structDictionary: {value: {id: 2147483647}}
+
+enum: max
+nEnum: Max
+enumArray: [Max]
+enumList: [Max]
+enumDictionary: {value: Max}

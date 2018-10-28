@@ -1,0 +1,4816 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1328792384, guid: eb7b5fdd7e668864eb659e1a0d727288, type: 3}
+  m_Name: Tests Storage
+  m_EditorClassIdentifier: 
+  _excludeGroups: []
+  _storages:
+  - {fileID: 114511821753953158}
+  - {fileID: 114901314205323982}
+  - {fileID: 114429176717667452}
+  - {fileID: 114397356381124438}
+  - {fileID: 114890567548467236}
+  - {fileID: 114296941280042294}
+  - {fileID: 114983823064809552}
+  - {fileID: 114038036825310988}
+  - {fileID: 114514250508638264}
+--- !u!114 &114038036825310988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -132745562, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: DllTests
+  m_EditorClassIdentifier: 
+  _group: DllTests
+  _proxy:
+    List: []
+--- !u!114 &114296941280042294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -127122129, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  _group: Test
+  _proxy:
+    NotNull: 1
+    Id: MinValues
+    Byte: 0
+    NByte:
+      HasValue: 1
+      Value: 0
+    ByteArray:
+      List: 00000000
+    ByteList:
+      List: 00000000
+    ByteDictionary:
+      _keys:
+      - value
+      _values: 00000000
+    SByte: -128
+    NSByte:
+      HasValue: 1
+      Value: -128
+    SByteArray:
+      List: 80ffffff
+    SByteList:
+      List: 80ffffff
+    SByteDictionary:
+      _keys:
+      - value
+      _values: 80ffffff
+    Short: -32768
+    NShort:
+      HasValue: 1
+      Value: -32768
+    ShortArray:
+      List: 0080
+    ShortList:
+      List: 0080
+    ShortDictionary:
+      _keys:
+      - value
+      _values: 0080
+    UShort: 0
+    NUShort:
+      HasValue: 1
+      Value: 0
+    UShortArray:
+      List: 00000000
+    UShortList:
+      List: 00000000
+    UShortDictionary:
+      _keys:
+      - value
+      _values: 00000000
+    Int: -2147483648
+    NInt:
+      HasValue: 1
+      Value: -2147483648
+    IntArray:
+      List: 00000080
+    IntList:
+      List: 00000080
+    IntDictionary:
+      _keys:
+      - value
+      _values: 00000080
+    UInt: 0
+    NUInt:
+      HasValue: 1
+      Value: 0
+    UIntArray:
+      List: 0000000000000000
+    UIntList:
+      List: 0000000000000000
+    UIntDictionary:
+      _keys:
+      - value
+      _values: 0000000000000000
+    Long: -9223372036854775807
+    NLong:
+      HasValue: 1
+      Value: -9223372036854775808
+    LongArray:
+      List: 0100000000000080
+    LongList:
+      List: 0100000000000080
+    LongDictionary:
+      _keys:
+      - value
+      _values: 0100000000000080
+    ULong: 0
+    NULong:
+      HasValue: 1
+      Value: 0
+    ULongArray:
+      List: 0000000000000000
+    ULongList:
+      List: 0000000000000000
+    ULongDictionary:
+      _keys:
+      - value
+      _values: 0000000000000000
+    Float: -3.402823e+38
+    NFloat:
+      HasValue: 1
+      Value: -3.402823e+38
+    FloatArray:
+      List:
+      - -3.402823e+38
+    FloatList:
+      List:
+      - -3.402823e+38
+    FloatDictionary:
+      _keys:
+      - value
+      _values:
+      - -3.402823e+38
+    Double: -1.79769313486232e+307
+    NDouble:
+      HasValue: 1
+      Value: -1.79769313486232e+307
+    DoubleArray:
+      List:
+      - -1.79769313486232e+307
+    DoubleList:
+      List:
+      - -1.79769313486232e+307
+    DoubleDictionary:
+      _keys:
+      - value
+      _values:
+      - -1.79769313486232e+307
+    String: min
+    StringsArray:
+      List:
+      - min
+    StringsList:
+      List:
+      - min
+    StringDictionary:
+      _keys:
+      - value
+      _values:
+      - min
+    Class:
+      NotNull: 1
+      Id: min
+    ClassArray:
+      List:
+      - NotNull: 1
+        Id: min
+    ClassList:
+      List:
+      - NotNull: 1
+        Id: min
+    ClassDictionary:
+      _keys:
+      - value
+      _values:
+      - NotNull: 1
+        Id: min
+    Struct:
+      NotNull: 1
+      Id: -2147483648
+    NStruct:
+      NotNull: 0
+      Id: 0
+    StructArray:
+      List:
+      - NotNull: 1
+        Id: -2147483648
+    StructList:
+      List:
+      - NotNull: 1
+        Id: -2147483648
+    StructDictionary:
+      _keys:
+      - value
+      _values:
+      - NotNull: 1
+        Id: -2147483648
+    Enum: 0
+    NEnum:
+      HasValue: 1
+      Value: 0
+    EnumArray:
+      List: 00000000
+    EnumList:
+      List: 00000000
+    EnumDictionary:
+      _keys:
+      - value
+      _values: 00000000
+--- !u!114 &114397356381124438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2049124939, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: TestByIdCustom2
+  m_EditorClassIdentifier: 
+  _group: TestByIdCustom2
+  _proxy:
+    _keys:
+    - DefValues
+    - MaxValues
+    - MinValues
+    - Test
+    - Test2
+    _values:
+    - NotNull: 1
+      Id: DefValues
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Short: 0
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0000
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - 
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 0
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: MaxValues
+      Byte: 255
+      NByte:
+        HasValue: 1
+        Value: 255
+      ByteArray:
+        List: ff000000
+      ByteList:
+        List: ff000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: ff000000
+      SByte: 127
+      NSByte:
+        HasValue: 1
+        Value: 127
+      SByteArray:
+        List: 7f000000
+      SByteList:
+        List: 7f000000
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 7f000000
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 65535
+      NUShort:
+        HasValue: 1
+        Value: 65535
+      UShortArray:
+        List: ffff0000
+      UShortList:
+        List: ffff0000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: ffff0000
+      Int: 2147483647
+      NInt:
+        HasValue: 1
+        Value: 2147483647
+      IntArray:
+        List: ffffff7f
+      IntList:
+        List: ffffff7f
+      IntDictionary:
+        _keys:
+        - value
+        _values: ffffff7f
+      UInt: 4294967295
+      NUInt:
+        HasValue: 1
+        Value: 4294967295
+      UIntArray:
+        List: ffffffff00000000
+      UIntList:
+        List: ffffffff00000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: ffffffff00000000
+      Long: 9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: 9223372036854775807
+      LongArray:
+        List: ffffffffffffff7f
+      LongList:
+        List: ffffffffffffff7f
+      LongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffff7f
+      ULong: 18446744073709551615
+      NULong:
+        HasValue: 1
+        Value: 18446744073709551615
+      ULongArray:
+        List: ffffffffffffffff
+      ULongList:
+        List: ffffffffffffffff
+      ULongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffffff
+      Float: 3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: 3.402823e+38
+      FloatArray:
+        List:
+        - 3.402823e+38
+      FloatList:
+        List:
+        - 3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 3.402823e+38
+      Double: 1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: 1.79769313486232e+307
+      DoubleArray:
+        List:
+        - 1.79769313486232e+307
+      DoubleList:
+        List:
+        - 1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 1.79769313486232e+307
+      String: max
+      StringsArray:
+        List:
+        - max
+      StringsList:
+        List:
+        - max
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - max
+      Class:
+        NotNull: 1
+        Id: max
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: max
+      Struct:
+        NotNull: 1
+        Id: 2147483647
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructList:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: 2147483647
+      Enum: 1
+      NEnum:
+        HasValue: 1
+        Value: 1
+      EnumArray:
+        List: 01000000
+      EnumList:
+        List: 01000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 01000000
+    - NotNull: 1
+      Id: MinValues
+      Byte: 0
+      NByte:
+        HasValue: 1
+        Value: 0
+      ByteArray:
+        List: 00000000
+      ByteList:
+        List: 00000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: -128
+      NSByte:
+        HasValue: 1
+        Value: -128
+      SByteArray:
+        List: 80ffffff
+      SByteList:
+        List: 80ffffff
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 80ffffff
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 0
+      NUShort:
+        HasValue: 1
+        Value: 0
+      UShortArray:
+        List: 00000000
+      UShortList:
+        List: 00000000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: -2147483648
+      NInt:
+        HasValue: 1
+        Value: -2147483648
+      IntArray:
+        List: 00000080
+      IntList:
+        List: 00000080
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000080
+      UInt: 0
+      NUInt:
+        HasValue: 1
+        Value: 0
+      UIntArray:
+        List: 0000000000000000
+      UIntList:
+        List: 0000000000000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: -9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: -9223372036854775808
+      LongArray:
+        List: 0100000000000080
+      LongList:
+        List: 0100000000000080
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0100000000000080
+      ULong: 0
+      NULong:
+        HasValue: 1
+        Value: 0
+      ULongArray:
+        List: 0000000000000000
+      ULongList:
+        List: 0000000000000000
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: -3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: -3.402823e+38
+      FloatArray:
+        List:
+        - -3.402823e+38
+      FloatList:
+        List:
+        - -3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - -3.402823e+38
+      Double: -1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: -1.79769313486232e+307
+      DoubleArray:
+        List:
+        - -1.79769313486232e+307
+      DoubleList:
+        List:
+        - -1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - -1.79769313486232e+307
+      String: min
+      StringsArray:
+        List:
+        - min
+      StringsList:
+        List:
+        - min
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - min
+      Class:
+        NotNull: 1
+        Id: min
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: min
+      Struct:
+        NotNull: 1
+        Id: -2147483648
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructList:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: -2147483648
+      Enum: 0
+      NEnum:
+        HasValue: 1
+        Value: 0
+      EnumArray:
+        List: 00000000
+      EnumList:
+        List: 00000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 00000000
+    - NotNull: 1
+      Id: Test
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: Test2
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 5672429
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+--- !u!114 &114429176717667452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1909184929, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: TestByIdCustom1
+  m_EditorClassIdentifier: 
+  _group: TestByIdCustom1
+  _proxy:
+    _keys:
+    - DefValues
+    - MaxValues
+    - MinValues
+    - Test
+    - Test2
+    _values:
+    - NotNull: 1
+      Id: DefValues
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Short: 0
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0000
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - 
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 0
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: MaxValues
+      Byte: 255
+      NByte:
+        HasValue: 1
+        Value: 255
+      ByteArray:
+        List: ff000000
+      ByteList:
+        List: ff000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: ff000000
+      SByte: 127
+      NSByte:
+        HasValue: 1
+        Value: 127
+      SByteArray:
+        List: 7f000000
+      SByteList:
+        List: 7f000000
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 7f000000
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 65535
+      NUShort:
+        HasValue: 1
+        Value: 65535
+      UShortArray:
+        List: ffff0000
+      UShortList:
+        List: ffff0000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: ffff0000
+      Int: 2147483647
+      NInt:
+        HasValue: 1
+        Value: 2147483647
+      IntArray:
+        List: ffffff7f
+      IntList:
+        List: ffffff7f
+      IntDictionary:
+        _keys:
+        - value
+        _values: ffffff7f
+      UInt: 4294967295
+      NUInt:
+        HasValue: 1
+        Value: 4294967295
+      UIntArray:
+        List: ffffffff00000000
+      UIntList:
+        List: ffffffff00000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: ffffffff00000000
+      Long: 9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: 9223372036854775807
+      LongArray:
+        List: ffffffffffffff7f
+      LongList:
+        List: ffffffffffffff7f
+      LongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffff7f
+      ULong: 18446744073709551615
+      NULong:
+        HasValue: 1
+        Value: 18446744073709551615
+      ULongArray:
+        List: ffffffffffffffff
+      ULongList:
+        List: ffffffffffffffff
+      ULongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffffff
+      Float: 3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: 3.402823e+38
+      FloatArray:
+        List:
+        - 3.402823e+38
+      FloatList:
+        List:
+        - 3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 3.402823e+38
+      Double: 1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: 1.79769313486232e+307
+      DoubleArray:
+        List:
+        - 1.79769313486232e+307
+      DoubleList:
+        List:
+        - 1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 1.79769313486232e+307
+      String: max
+      StringsArray:
+        List:
+        - max
+      StringsList:
+        List:
+        - max
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - max
+      Class:
+        NotNull: 1
+        Id: max
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: max
+      Struct:
+        NotNull: 1
+        Id: 2147483647
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructList:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: 2147483647
+      Enum: 1
+      NEnum:
+        HasValue: 1
+        Value: 1
+      EnumArray:
+        List: 01000000
+      EnumList:
+        List: 01000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 01000000
+    - NotNull: 1
+      Id: MinValues
+      Byte: 0
+      NByte:
+        HasValue: 1
+        Value: 0
+      ByteArray:
+        List: 00000000
+      ByteList:
+        List: 00000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: -128
+      NSByte:
+        HasValue: 1
+        Value: -128
+      SByteArray:
+        List: 80ffffff
+      SByteList:
+        List: 80ffffff
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 80ffffff
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 0
+      NUShort:
+        HasValue: 1
+        Value: 0
+      UShortArray:
+        List: 00000000
+      UShortList:
+        List: 00000000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: -2147483648
+      NInt:
+        HasValue: 1
+        Value: -2147483648
+      IntArray:
+        List: 00000080
+      IntList:
+        List: 00000080
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000080
+      UInt: 0
+      NUInt:
+        HasValue: 1
+        Value: 0
+      UIntArray:
+        List: 0000000000000000
+      UIntList:
+        List: 0000000000000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: -9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: -9223372036854775808
+      LongArray:
+        List: 0100000000000080
+      LongList:
+        List: 0100000000000080
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0100000000000080
+      ULong: 0
+      NULong:
+        HasValue: 1
+        Value: 0
+      ULongArray:
+        List: 0000000000000000
+      ULongList:
+        List: 0000000000000000
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: -3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: -3.402823e+38
+      FloatArray:
+        List:
+        - -3.402823e+38
+      FloatList:
+        List:
+        - -3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - -3.402823e+38
+      Double: -1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: -1.79769313486232e+307
+      DoubleArray:
+        List:
+        - -1.79769313486232e+307
+      DoubleList:
+        List:
+        - -1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - -1.79769313486232e+307
+      String: min
+      StringsArray:
+        List:
+        - min
+      StringsList:
+        List:
+        - min
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - min
+      Class:
+        NotNull: 1
+        Id: min
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: min
+      Struct:
+        NotNull: 1
+        Id: -2147483648
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructList:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: -2147483648
+      Enum: 0
+      NEnum:
+        HasValue: 1
+        Value: 0
+      EnumArray:
+        List: 00000000
+      EnumList:
+        List: 00000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 00000000
+    - NotNull: 1
+      Id: Test
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: Test2
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 5672429
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+--- !u!114 &114511821753953158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -872759648, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: TestById
+  m_EditorClassIdentifier: 
+  _group: TestById
+  _proxy:
+    _keys:
+    - DefValues
+    - MaxValues
+    - MinValues
+    - Test
+    - Test2
+    _values:
+    - NotNull: 1
+      Id: DefValues
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Short: 0
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0000
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - 
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 0
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: MaxValues
+      Byte: 255
+      NByte:
+        HasValue: 1
+        Value: 255
+      ByteArray:
+        List: ff000000
+      ByteList:
+        List: ff000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: ff000000
+      SByte: 127
+      NSByte:
+        HasValue: 1
+        Value: 127
+      SByteArray:
+        List: 7f000000
+      SByteList:
+        List: 7f000000
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 7f000000
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 65535
+      NUShort:
+        HasValue: 1
+        Value: 65535
+      UShortArray:
+        List: ffff0000
+      UShortList:
+        List: ffff0000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: ffff0000
+      Int: 2147483647
+      NInt:
+        HasValue: 1
+        Value: 2147483647
+      IntArray:
+        List: ffffff7f
+      IntList:
+        List: ffffff7f
+      IntDictionary:
+        _keys:
+        - value
+        _values: ffffff7f
+      UInt: 4294967295
+      NUInt:
+        HasValue: 1
+        Value: 4294967295
+      UIntArray:
+        List: ffffffff00000000
+      UIntList:
+        List: ffffffff00000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: ffffffff00000000
+      Long: 9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: 9223372036854775807
+      LongArray:
+        List: ffffffffffffff7f
+      LongList:
+        List: ffffffffffffff7f
+      LongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffff7f
+      ULong: 18446744073709551615
+      NULong:
+        HasValue: 1
+        Value: 18446744073709551615
+      ULongArray:
+        List: ffffffffffffffff
+      ULongList:
+        List: ffffffffffffffff
+      ULongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffffff
+      Float: 3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: 3.402823e+38
+      FloatArray:
+        List:
+        - 3.402823e+38
+      FloatList:
+        List:
+        - 3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 3.402823e+38
+      Double: 1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: 1.79769313486232e+307
+      DoubleArray:
+        List:
+        - 1.79769313486232e+307
+      DoubleList:
+        List:
+        - 1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 1.79769313486232e+307
+      String: max
+      StringsArray:
+        List:
+        - max
+      StringsList:
+        List:
+        - max
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - max
+      Class:
+        NotNull: 1
+        Id: max
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: max
+      Struct:
+        NotNull: 1
+        Id: 2147483647
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructList:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: 2147483647
+      Enum: 1
+      NEnum:
+        HasValue: 1
+        Value: 1
+      EnumArray:
+        List: 01000000
+      EnumList:
+        List: 01000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 01000000
+    - NotNull: 1
+      Id: MinValues
+      Byte: 0
+      NByte:
+        HasValue: 1
+        Value: 0
+      ByteArray:
+        List: 00000000
+      ByteList:
+        List: 00000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: -128
+      NSByte:
+        HasValue: 1
+        Value: -128
+      SByteArray:
+        List: 80ffffff
+      SByteList:
+        List: 80ffffff
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 80ffffff
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 0
+      NUShort:
+        HasValue: 1
+        Value: 0
+      UShortArray:
+        List: 00000000
+      UShortList:
+        List: 00000000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: -2147483648
+      NInt:
+        HasValue: 1
+        Value: -2147483648
+      IntArray:
+        List: 00000080
+      IntList:
+        List: 00000080
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000080
+      UInt: 0
+      NUInt:
+        HasValue: 1
+        Value: 0
+      UIntArray:
+        List: 0000000000000000
+      UIntList:
+        List: 0000000000000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: -9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: -9223372036854775808
+      LongArray:
+        List: 0100000000000080
+      LongList:
+        List: 0100000000000080
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0100000000000080
+      ULong: 0
+      NULong:
+        HasValue: 1
+        Value: 0
+      ULongArray:
+        List: 0000000000000000
+      ULongList:
+        List: 0000000000000000
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: -3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: -3.402823e+38
+      FloatArray:
+        List:
+        - -3.402823e+38
+      FloatList:
+        List:
+        - -3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - -3.402823e+38
+      Double: -1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: -1.79769313486232e+307
+      DoubleArray:
+        List:
+        - -1.79769313486232e+307
+      DoubleList:
+        List:
+        - -1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - -1.79769313486232e+307
+      String: min
+      StringsArray:
+        List:
+        - min
+      StringsList:
+        List:
+        - min
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - min
+      Class:
+        NotNull: 1
+        Id: min
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: min
+      Struct:
+        NotNull: 1
+        Id: -2147483648
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructList:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: -2147483648
+      Enum: 0
+      NEnum:
+        HasValue: 1
+        Value: 0
+      EnumArray:
+        List: 00000000
+      EnumList:
+        List: 00000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 00000000
+    - NotNull: 1
+      Id: Test
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: Test2
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 5672429
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+--- !u!114 &114514250508638264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2050366765, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: DllTest
+  m_EditorClassIdentifier: 
+  _group: DllTest
+  _proxy:
+    NotNull: 0
+    Id: 
+    Byte: 0
+    NByte:
+      HasValue: 0
+      Value: 0
+    ByteArray:
+      List: 
+    ByteList:
+      List: 
+    ByteDictionary:
+      _keys: []
+      _values: 
+    SByte: 0
+    NSByte:
+      HasValue: 0
+      Value: 0
+    SByteArray:
+      List: 
+    SByteList:
+      List: 
+    SByteDictionary:
+      _keys: []
+      _values: 
+    Short: 0
+    NShort:
+      HasValue: 0
+      Value: 0
+    ShortArray:
+      List: 
+    ShortList:
+      List: 
+    ShortDictionary:
+      _keys: []
+      _values: 
+    UShort: 0
+    NUShort:
+      HasValue: 0
+      Value: 0
+    UShortArray:
+      List: 
+    UShortList:
+      List: 
+    UShortDictionary:
+      _keys: []
+      _values: 
+    Int: 0
+    NInt:
+      HasValue: 0
+      Value: 0
+    IntArray:
+      List: 
+    IntList:
+      List: 
+    IntDictionary:
+      _keys: []
+      _values: 
+    UInt: 0
+    NUInt:
+      HasValue: 0
+      Value: 0
+    UIntArray:
+      List: 
+    UIntList:
+      List: 
+    UIntDictionary:
+      _keys: []
+      _values: 
+    Long: 0
+    NLong:
+      HasValue: 0
+      Value: 0
+    LongArray:
+      List: 
+    LongList:
+      List: 
+    LongDictionary:
+      _keys: []
+      _values: 
+    ULong: 0
+    NULong:
+      HasValue: 0
+      Value: 0
+    ULongArray:
+      List: 
+    ULongList:
+      List: 
+    ULongDictionary:
+      _keys: []
+      _values: 
+    Float: 0
+    NFloat:
+      HasValue: 0
+      Value: 0
+    FloatArray:
+      List: []
+    FloatList:
+      List: []
+    FloatDictionary:
+      _keys: []
+      _values: []
+    Double: 0
+    NDouble:
+      HasValue: 0
+      Value: 0
+    DoubleArray:
+      List: []
+    DoubleList:
+      List: []
+    DoubleDictionary:
+      _keys: []
+      _values: []
+    String: 
+    StringsArray:
+      List: []
+    StringsList:
+      List: []
+    StringDictionary:
+      _keys: []
+      _values: []
+    Class:
+      NotNull: 0
+      Id: 
+    ClassArray:
+      List: []
+    ClassList:
+      List: []
+    ClassDictionary:
+      _keys: []
+      _values: []
+    Struct:
+      NotNull: 0
+      Id: 0
+    NStruct:
+      NotNull: 0
+      Id: 0
+    StructArray:
+      List: []
+    StructList:
+      List: []
+    StructDictionary:
+      _keys: []
+      _values: []
+    Enum: 0
+    NEnum:
+      HasValue: 0
+      Value: 0
+    EnumArray:
+      List: 
+    EnumList:
+      List: 
+    EnumDictionary:
+      _keys: []
+      _values: 
+--- !u!114 &114890567548467236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 524974801, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: Tests
+  m_EditorClassIdentifier: 
+  _group: Tests
+  _proxy:
+    List:
+    - NotNull: 1
+      Id: DefValues
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Short: 0
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0000
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - 
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 0
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: MaxValues
+      Byte: 255
+      NByte:
+        HasValue: 1
+        Value: 255
+      ByteArray:
+        List: ff000000
+      ByteList:
+        List: ff000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: ff000000
+      SByte: 127
+      NSByte:
+        HasValue: 1
+        Value: 127
+      SByteArray:
+        List: 7f000000
+      SByteList:
+        List: 7f000000
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 7f000000
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 65535
+      NUShort:
+        HasValue: 1
+        Value: 65535
+      UShortArray:
+        List: ffff0000
+      UShortList:
+        List: ffff0000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: ffff0000
+      Int: 2147483647
+      NInt:
+        HasValue: 1
+        Value: 2147483647
+      IntArray:
+        List: ffffff7f
+      IntList:
+        List: ffffff7f
+      IntDictionary:
+        _keys:
+        - value
+        _values: ffffff7f
+      UInt: 4294967295
+      NUInt:
+        HasValue: 1
+        Value: 4294967295
+      UIntArray:
+        List: ffffffff00000000
+      UIntList:
+        List: ffffffff00000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: ffffffff00000000
+      Long: 9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: 9223372036854775807
+      LongArray:
+        List: ffffffffffffff7f
+      LongList:
+        List: ffffffffffffff7f
+      LongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffff7f
+      ULong: 18446744073709551615
+      NULong:
+        HasValue: 1
+        Value: 18446744073709551615
+      ULongArray:
+        List: ffffffffffffffff
+      ULongList:
+        List: ffffffffffffffff
+      ULongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffffff
+      Float: 3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: 3.402823e+38
+      FloatArray:
+        List:
+        - 3.402823e+38
+      FloatList:
+        List:
+        - 3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 3.402823e+38
+      Double: 1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: 1.79769313486232e+307
+      DoubleArray:
+        List:
+        - 1.79769313486232e+307
+      DoubleList:
+        List:
+        - 1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 1.79769313486232e+307
+      String: max
+      StringsArray:
+        List:
+        - max
+      StringsList:
+        List:
+        - max
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - max
+      Class:
+        NotNull: 1
+        Id: max
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: max
+      Struct:
+        NotNull: 1
+        Id: 2147483647
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructList:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: 2147483647
+      Enum: 1
+      NEnum:
+        HasValue: 1
+        Value: 1
+      EnumArray:
+        List: 01000000
+      EnumList:
+        List: 01000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 01000000
+    - NotNull: 1
+      Id: MinValues
+      Byte: 0
+      NByte:
+        HasValue: 1
+        Value: 0
+      ByteArray:
+        List: 00000000
+      ByteList:
+        List: 00000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: -128
+      NSByte:
+        HasValue: 1
+        Value: -128
+      SByteArray:
+        List: 80ffffff
+      SByteList:
+        List: 80ffffff
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 80ffffff
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 0
+      NUShort:
+        HasValue: 1
+        Value: 0
+      UShortArray:
+        List: 00000000
+      UShortList:
+        List: 00000000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: -2147483648
+      NInt:
+        HasValue: 1
+        Value: -2147483648
+      IntArray:
+        List: 00000080
+      IntList:
+        List: 00000080
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000080
+      UInt: 0
+      NUInt:
+        HasValue: 1
+        Value: 0
+      UIntArray:
+        List: 0000000000000000
+      UIntList:
+        List: 0000000000000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: -9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: -9223372036854775808
+      LongArray:
+        List: 0100000000000080
+      LongList:
+        List: 0100000000000080
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0100000000000080
+      ULong: 0
+      NULong:
+        HasValue: 1
+        Value: 0
+      ULongArray:
+        List: 0000000000000000
+      ULongList:
+        List: 0000000000000000
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: -3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: -3.402823e+38
+      FloatArray:
+        List:
+        - -3.402823e+38
+      FloatList:
+        List:
+        - -3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - -3.402823e+38
+      Double: -1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: -1.79769313486232e+307
+      DoubleArray:
+        List:
+        - -1.79769313486232e+307
+      DoubleList:
+        List:
+        - -1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - -1.79769313486232e+307
+      String: min
+      StringsArray:
+        List:
+        - min
+      StringsList:
+        List:
+        - min
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - min
+      Class:
+        NotNull: 1
+        Id: min
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: min
+      Struct:
+        NotNull: 1
+        Id: -2147483648
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructList:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: -2147483648
+      Enum: 0
+      NEnum:
+        HasValue: 1
+        Value: 0
+      EnumArray:
+        List: 00000000
+      EnumList:
+        List: 00000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 00000000
+    - NotNull: 1
+      Id: Test
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: Test2
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 5672429
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+--- !u!114 &114901314205323982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -789872502, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: TestByFileName
+  m_EditorClassIdentifier: 
+  _group: TestByFileName
+  _proxy:
+    _keys:
+    - DefValues
+    - MaxValues
+    - MinValues
+    - Test
+    - Test 2
+    _values:
+    - NotNull: 1
+      Id: DefValues
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Short: 0
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0000
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 0
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - 
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 0
+          Id: 0
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: MaxValues
+      Byte: 255
+      NByte:
+        HasValue: 1
+        Value: 255
+      ByteArray:
+        List: ff000000
+      ByteList:
+        List: ff000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: ff000000
+      SByte: 127
+      NSByte:
+        HasValue: 1
+        Value: 127
+      SByteArray:
+        List: 7f000000
+      SByteList:
+        List: 7f000000
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 7f000000
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 65535
+      NUShort:
+        HasValue: 1
+        Value: 65535
+      UShortArray:
+        List: ffff0000
+      UShortList:
+        List: ffff0000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: ffff0000
+      Int: 2147483647
+      NInt:
+        HasValue: 1
+        Value: 2147483647
+      IntArray:
+        List: ffffff7f
+      IntList:
+        List: ffffff7f
+      IntDictionary:
+        _keys:
+        - value
+        _values: ffffff7f
+      UInt: 4294967295
+      NUInt:
+        HasValue: 1
+        Value: 4294967295
+      UIntArray:
+        List: ffffffff00000000
+      UIntList:
+        List: ffffffff00000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: ffffffff00000000
+      Long: 9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: 9223372036854775807
+      LongArray:
+        List: ffffffffffffff7f
+      LongList:
+        List: ffffffffffffff7f
+      LongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffff7f
+      ULong: 18446744073709551615
+      NULong:
+        HasValue: 1
+        Value: 18446744073709551615
+      ULongArray:
+        List: ffffffffffffffff
+      ULongList:
+        List: ffffffffffffffff
+      ULongDictionary:
+        _keys:
+        - value
+        _values: ffffffffffffffff
+      Float: 3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: 3.402823e+38
+      FloatArray:
+        List:
+        - 3.402823e+38
+      FloatList:
+        List:
+        - 3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - 3.402823e+38
+      Double: 1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: 1.79769313486232e+307
+      DoubleArray:
+        List:
+        - 1.79769313486232e+307
+      DoubleList:
+        List:
+        - 1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - 1.79769313486232e+307
+      String: max
+      StringsArray:
+        List:
+        - max
+      StringsList:
+        List:
+        - max
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - max
+      Class:
+        NotNull: 1
+        Id: max
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: max
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: max
+      Struct:
+        NotNull: 1
+        Id: 2147483647
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructList:
+        List:
+        - NotNull: 1
+          Id: 2147483647
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: 2147483647
+      Enum: 1
+      NEnum:
+        HasValue: 1
+        Value: 1
+      EnumArray:
+        List: 01000000
+      EnumList:
+        List: 01000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 01000000
+    - NotNull: 1
+      Id: MinValues
+      Byte: 0
+      NByte:
+        HasValue: 1
+        Value: 0
+      ByteArray:
+        List: 00000000
+      ByteList:
+        List: 00000000
+      ByteDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      SByte: -128
+      NSByte:
+        HasValue: 1
+        Value: -128
+      SByteArray:
+        List: 80ffffff
+      SByteList:
+        List: 80ffffff
+      SByteDictionary:
+        _keys:
+        - value
+        _values: 80ffffff
+      Short: -32768
+      NShort:
+        HasValue: 1
+        Value: -32768
+      ShortArray:
+        List: 0080
+      ShortList:
+        List: 0080
+      ShortDictionary:
+        _keys:
+        - value
+        _values: 0080
+      UShort: 0
+      NUShort:
+        HasValue: 1
+        Value: 0
+      UShortArray:
+        List: 00000000
+      UShortList:
+        List: 00000000
+      UShortDictionary:
+        _keys:
+        - value
+        _values: 00000000
+      Int: -2147483648
+      NInt:
+        HasValue: 1
+        Value: -2147483648
+      IntArray:
+        List: 00000080
+      IntList:
+        List: 00000080
+      IntDictionary:
+        _keys:
+        - value
+        _values: 00000080
+      UInt: 0
+      NUInt:
+        HasValue: 1
+        Value: 0
+      UIntArray:
+        List: 0000000000000000
+      UIntList:
+        List: 0000000000000000
+      UIntDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Long: -9223372036854775807
+      NLong:
+        HasValue: 1
+        Value: -9223372036854775808
+      LongArray:
+        List: 0100000000000080
+      LongList:
+        List: 0100000000000080
+      LongDictionary:
+        _keys:
+        - value
+        _values: 0100000000000080
+      ULong: 0
+      NULong:
+        HasValue: 1
+        Value: 0
+      ULongArray:
+        List: 0000000000000000
+      ULongList:
+        List: 0000000000000000
+      ULongDictionary:
+        _keys:
+        - value
+        _values: 0000000000000000
+      Float: -3.402823e+38
+      NFloat:
+        HasValue: 1
+        Value: -3.402823e+38
+      FloatArray:
+        List:
+        - -3.402823e+38
+      FloatList:
+        List:
+        - -3.402823e+38
+      FloatDictionary:
+        _keys:
+        - value
+        _values:
+        - -3.402823e+38
+      Double: -1.79769313486232e+307
+      NDouble:
+        HasValue: 1
+        Value: -1.79769313486232e+307
+      DoubleArray:
+        List:
+        - -1.79769313486232e+307
+      DoubleList:
+        List:
+        - -1.79769313486232e+307
+      DoubleDictionary:
+        _keys:
+        - value
+        _values:
+        - -1.79769313486232e+307
+      String: min
+      StringsArray:
+        List:
+        - min
+      StringsList:
+        List:
+        - min
+      StringDictionary:
+        _keys:
+        - value
+        _values:
+        - min
+      Class:
+        NotNull: 1
+        Id: min
+      ClassArray:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassList:
+        List:
+        - NotNull: 1
+          Id: min
+      ClassDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: min
+      Struct:
+        NotNull: 1
+        Id: -2147483648
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructList:
+        List:
+        - NotNull: 1
+          Id: -2147483648
+      StructDictionary:
+        _keys:
+        - value
+        _values:
+        - NotNull: 1
+          Id: -2147483648
+      Enum: 0
+      NEnum:
+        HasValue: 1
+        Value: 0
+      EnumArray:
+        List: 00000000
+      EnumList:
+        List: 00000000
+      EnumDictionary:
+        _keys:
+        - value
+        _values: 00000000
+    - NotNull: 1
+      Id: Test
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 0
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+    - NotNull: 1
+      Id: Test2
+      Byte: 0
+      NByte:
+        HasValue: 0
+        Value: 0
+      ByteArray:
+        List: 
+      ByteList:
+        List: 
+      ByteDictionary:
+        _keys: []
+        _values: 
+      SByte: 0
+      NSByte:
+        HasValue: 0
+        Value: 0
+      SByteArray:
+        List: 
+      SByteList:
+        List: 
+      SByteDictionary:
+        _keys: []
+        _values: 
+      Short: 12
+      NShort:
+        HasValue: 0
+        Value: 0
+      ShortArray:
+        List: 
+      ShortList:
+        List: 
+      ShortDictionary:
+        _keys: []
+        _values: 
+      UShort: 0
+      NUShort:
+        HasValue: 0
+        Value: 0
+      UShortArray:
+        List: 
+      UShortList:
+        List: 
+      UShortDictionary:
+        _keys: []
+        _values: 
+      Int: 0
+      NInt:
+        HasValue: 0
+        Value: 0
+      IntArray:
+        List: 
+      IntList:
+        List: 
+      IntDictionary:
+        _keys: []
+        _values: 
+      UInt: 0
+      NUInt:
+        HasValue: 0
+        Value: 0
+      UIntArray:
+        List: 
+      UIntList:
+        List: 
+      UIntDictionary:
+        _keys: []
+        _values: 
+      Long: 5672429
+      NLong:
+        HasValue: 0
+        Value: 0
+      LongArray:
+        List: 
+      LongList:
+        List: 
+      LongDictionary:
+        _keys: []
+        _values: 
+      ULong: 0
+      NULong:
+        HasValue: 0
+        Value: 0
+      ULongArray:
+        List: 
+      ULongList:
+        List: 
+      ULongDictionary:
+        _keys: []
+        _values: 
+      Float: 0
+      NFloat:
+        HasValue: 0
+        Value: 0
+      FloatArray:
+        List: []
+      FloatList:
+        List: []
+      FloatDictionary:
+        _keys: []
+        _values: []
+      Double: 0
+      NDouble:
+        HasValue: 0
+        Value: 0
+      DoubleArray:
+        List: []
+      DoubleList:
+        List: []
+      DoubleDictionary:
+        _keys: []
+        _values: []
+      String: 
+      StringsArray:
+        List: []
+      StringsList:
+        List: []
+      StringDictionary:
+        _keys: []
+        _values: []
+      Class:
+        NotNull: 0
+        Id: 
+      ClassArray:
+        List: []
+      ClassList:
+        List: []
+      ClassDictionary:
+        _keys: []
+        _values: []
+      Struct:
+        NotNull: 0
+        Id: 0
+      NStruct:
+        NotNull: 0
+        Id: 0
+      StructArray:
+        List: []
+      StructList:
+        List: []
+      StructDictionary:
+        _keys: []
+        _values: []
+      Enum: 0
+      NEnum:
+        HasValue: 0
+        Value: 0
+      EnumArray:
+        List: 
+      EnumList:
+        List: 
+      EnumDictionary:
+        _keys: []
+        _values: 
+--- !u!114 &114983823064809552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1599846438, guid: 94a336afdda70824ba025f4da1f8133a, type: 3}
+  m_Name: DllTestById2
+  m_EditorClassIdentifier: 
+  _group: DllTestById2
+  _proxy:
+    _keys: []
+    _values: []

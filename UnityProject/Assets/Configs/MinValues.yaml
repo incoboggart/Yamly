@@ -1,0 +1,81 @@
+id: MinValues
+byte: 0
+nByte: 0
+byteArray: [0]
+byteList: [0]
+byteDictionary: {value: 0}
+
+sByte: -128
+nSByte: -128
+sByteArray: [-128]
+sByteList: [-128]
+sByteDictionary: {value: -128}
+
+short: -32768
+nShort: -32768
+shortArray: [-32768]
+shortList: [-32768]
+shortDictionary: {value: -32768}
+
+uShort: 0
+nUShort: 0
+uShortArray: [0]
+uShortList: [0]
+uShortDictionary: {value: 0}
+
+int: -2147483648
+nInt: -2147483648
+intArray: [-2147483648]
+intList: [-2147483648]
+intDictionary: {value: -2147483648}
+
+uInt: 0
+nUInt: 0
+uIntArray: [0]
+uIntList: [0]
+uIntDictionary: {value: 0}
+
+long: -9223372036854775807
+nLong: -9223372036854775808
+longArray: [-9223372036854775807]
+longList: [-9223372036854775807]
+longDictionary: {value: -9223372036854775807}
+
+uLong: 0
+nULong: 0
+uLongArray: [0]
+uLongList: [0]
+uLongDictionary: {value: 0}
+
+float: -3.402823E+38
+nFloat: -3.402823E+38
+floatArray: [-3.402823E+38]
+floatList: [-3.402823E+38]
+floatDictionary: {value: -3.402823E+38}
+
+double: -1.79769313486232E+307
+nDouble: -1.79769313486232E+307
+doubleArray: [-1.79769313486232E+307]
+doubleList: [-1.79769313486232E+307]
+doubleDictionary: {value: -1.79769313486232E+307}
+
+string: min
+stringsArray: [min]
+stringsList: [min]
+stringDictionary: {value: min}
+
+class: {id: min}
+classArray: [{id: min}]
+classList: [{id: min}]
+classDictionary: {value: {id: min}}
+
+struct: {id: -2147483648}
+structArray: [{id: -2147483648}]
+structList: [{id: -2147483648}]
+structDictionary: {value: {id: -2147483648}}
+
+enum: Min
+nEnum: Min
+enumArray: [Min]
+enumList: [Min]
+enumDictionary: {value: Min}

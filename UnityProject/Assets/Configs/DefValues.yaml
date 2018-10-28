@@ -1,0 +1,82 @@
+id: DefValues
+byte:
+nByte:
+byteArray: []
+byteList: []
+byteDictionary: {value: }
+
+sByte:
+nSByte:
+sByteArray:
+sByteList:
+sByteDictionary: {value: }
+
+short:
+nShort:
+shortArray: []
+shortList: []
+shortDictionary: {value: }
+
+uShort:
+nUShort:
+uShortArray: []
+uShortList: []
+uShortDictionary: {value: }
+
+int:
+nInt:
+intArray: []
+intList: []
+intDictionary: {value: }
+
+uInt: 
+nUInt: 
+uIntArray: []
+uIntList: []
+uIntDictionary: {value: }
+
+long: 
+nLong: 
+longArray: []
+longList: []
+longDictionary: {value: }
+
+uLong: 
+nULong: 
+uLongArray: []
+uLongList: []
+uLongDictionary: {value: }
+
+float: 
+nFloat: 
+floatArray: []
+floatList: []
+floatDictionary: {value: }
+
+double: 
+nDouble: 
+doubleArray: []
+doubleList: []
+doubleDictionary: {value: }
+
+string:
+stringsArray: []
+stringsList: []
+stringDictionary: {value: }
+
+class:
+classArray: []
+classList: []
+classDictionary: {value: }
+
+struct:
+# nStruct: {id: 0}
+structArray: []
+structList: []
+structDictionary: {value: }
+
+enum: 
+nEnum: 
+enumArray: 
+enumList: 
+enumDictionary: 

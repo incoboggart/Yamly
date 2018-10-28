@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DFC681FF-0D5C-42FA-A571-99F25ABCE27C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Yamly</RootNamespace>
+    <AssemblyName>Yamly.Generate</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <LangVersion>6</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEditor, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.5.0.1\lib\net35\YamlDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeGeneration\CodeGenerationUtility.cs" />
+    <Compile Include="CodeGeneration\ProxyCodeGenerator.cs" />
+    <Compile Include="CodeGeneration\TypeUtility.cs" />
+    <Compile Include="CodeGeneration\UtilityAssemblyBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CodeGeneration\ProxyAssemblyBuilder.cs" />
+    <Compile Include="CodeGeneration\RootDefinition.cs" />
+    <Compile Include="UnityEditor\AssetProcessor.cs" />
+    <Compile Include="UnityEditor\ConfigGroupPropertyDrawer.cs" />
+    <Compile Include="UnityEditor\ConvertMenuItems.cs" />
+    <Compile Include="UnityEditor\ConvertUtility.cs" />
+    <Compile Include="UnityEditor\DataRoute.cs" />
+    <Compile Include="UnityEditor\AssetUtility.cs" />
+    <Compile Include="UnityEditor\YamlyEditorPrefs.cs" />
+    <Compile Include="UnityEditor\SerializePropertyStringList.cs" />
+    <Compile Include="UnityEditor\SingleSourceDefinitionEditor.cs" />
+    <Compile Include="UnityEditor\StorageDefinitionEditor.cs" />
+    <Compile Include="UnityEditor\TreeViewExtensions.cs" />
+    <Compile Include="UnityEditor\YamlyAssetPostprocessor.cs" />
+    <Compile Include="UnityEditor\YamlyBuildPreprocessor.cs" />
+    <Compile Include="UnityEditor\YamlySettings.cs" />
+    <Compile Include="Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yamly.Attributes\Yamly.Attributes.csproj">
+      <Project>{60e232dc-3c82-48b6-b3dc-00166b5b5ed4}</Project>
+      <Name>Yamly.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Yamly\Yamly.csproj">
+      <Project>{d24b1635-8108-4378-a2a2-328188f9ef34}</Project>
+      <Name>Yamly</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeGeneration\CodeGeneratorBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetDir)Yamly.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.dll" /Y
+copy "$(TargetDir)Yamly.pdb" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.pdb" /Y
+copy "$(TargetDir)Yamly.Attributes.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.Attributes.dll" /Y
+copy "$(TargetDir)Yamly.Attributes.pdb" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.Attributes.pdb" /Y
+copy "$(TargetDir)Yamly.Generate.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Editor\Yamly.Generate.dll" /Y
+copy "$(TargetDir)Yamly.Generate.pdb" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Editor\Yamly.Generate.pdb" /Y
+copy "$(TargetDir)YamlDotNet.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Editor\YamlDotNet.dll" /Y
+copy "$(TargetDir)YamlDotNet.xml" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Editor\YamlDotNet.xml" /Y</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+</Project>

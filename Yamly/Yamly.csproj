@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D24B1635-8108-4378-A2A2-328188F9EF34}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Yamly</RootNamespace>
+    <AssemblyName>Yamly</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigGroupAttribute.cs" />
+    <Compile Include="FolderSource.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy\DictionaryProxy.cs" />
+    <Compile Include="Proxy\Extensions.cs" />
+    <Compile Include="Proxy\ListProxy.cs" />
+    <Compile Include="Proxy\NullableProxy.cs" />
+    <Compile Include="Proxy\ProxyUtility.cs" />
+    <Compile Include="FolderSourceDefinition.cs" />
+    <Compile Include="SingleSource.cs" />
+    <Compile Include="StorageBase.cs" />
+    <Compile Include="Storage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yamly.Attributes\Yamly.Attributes.csproj">
+      <Project>{60e232dc-3c82-48b6-b3dc-00166b5b5ed4}</Project>
+      <Name>Yamly.Attributes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetDir)Yamly.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.dll" /Y
+
+copy "$(TargetDir)Yamly.pdb" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.pdb" /Y
+copy "$(TargetDir)Yamly.Attributes.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.Attributes.dll" /Y
+copy "$(TargetDir)Yamly.Attributes.pdb" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.Attributes.pdb" /Y</PostBuildEvent>
+  </PropertyGroup>
+</Project>
