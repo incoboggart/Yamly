@@ -85,10 +85,17 @@ namespace Yamly.UnityEditor
             _searchField = new SearchField();
         }
 
+        private static void DrawEmpty()
+        {
+            EditorGUILayout.HelpBox("There is no groups defined in project", MessageType.Info);
+        }
+        
         public override void OnInspectorGUI()
         {
-            if (_roots == null)
+            if (_roots == null
+                || _roots.Length == 0)
             {
+                DrawEmpty();
                 return;
             }
             

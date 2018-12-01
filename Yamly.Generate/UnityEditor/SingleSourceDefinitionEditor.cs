@@ -84,12 +84,20 @@ namespace Yamly.UnityEditor
 
         public override void OnInspectorGUI()
         {
-            if (_roots == null)
+            if (_roots == null
+                || _groups == null)
             {
+                DrawEmpty();
                 return;
             }
             
             var source = (SingleSource) target;
+            if (source.Groups == null)
+            {
+                DrawEmpty();
+                return;
+            }
+            
             if (source.Groups.Length != _groups.Length)
             {
                 var assets = new TextAsset[_groups.Length];
@@ -141,6 +149,11 @@ namespace Yamly.UnityEditor
                     _reloadOnLayout = true;
                 }
             }
+        }
+
+        private static void DrawEmpty()
+        {
+            EditorGUILayout.HelpBox("There is no groups defined in project", MessageType.Info);
         }
 
         private sealed class TreeView 
