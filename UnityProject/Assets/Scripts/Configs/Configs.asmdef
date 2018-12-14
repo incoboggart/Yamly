@@ -1,3 +1,8 @@
-﻿{
-	"name": "Configs"
+{
+    "name": "Configs",
+    "references": [],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
 }

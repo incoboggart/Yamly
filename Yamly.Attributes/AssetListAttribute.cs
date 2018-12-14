@@ -17,15 +17,23 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
+using System;
+using System.Collections.Generic;
+
 namespace Yamly
 {
     public sealed class AssetListAttribute 
         : AssetDeclarationAttributeBase
     {
-        public override bool IsSingle => false;
+        public override bool GetIsSingleFile() => IsSingleFile;
+        public override DeclarationType GetDeclarationType() => DeclarationType.List;
+
+        public bool IsSingleFile { get; set; } = false;
 
         public AssetListAttribute(string group) : base(group)
         {
+            
         }
     }
 }

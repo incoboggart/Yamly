@@ -8,12 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1503753834, guid: eb7b5fdd7e668864eb659e1a0d727288, type: 3}
+  m_Script: {fileID: 1503753834, guid: c6d590f551e919b428a26656b1d5cf84, type: 3}
   m_Name: New Single Source
   m_EditorClassIdentifier: 
   _groups:
   - Test
+  - Multi
+  - MultiDic
   - DllTest
   _assets:
-  - {fileID: 4900000, guid: c66ff58af5f4cfe46a5c84bd1d19cb9c, type: 3}
+  - {fileID: 4900000, guid: 7327fcbb86a66e148a329f57b910a18e, type: 3}
+  - {fileID: 4900000, guid: 62d99ad9c7079894f9d9109d399f6cea, type: 3}
+  - {fileID: 4900000, guid: d07c9a3bb71bfb341ba6a64093711d0b, type: 3}
   - {fileID: 0}

@@ -48,7 +48,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)Yamly.Attributes.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.Attributes.dll" /Y
-copy "$(TargetDir)Yamly.Attributes.pdb" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.Attributes.pdb" /Y</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)Yamly.Attributes.dll" "$(SolutionDir)UnityProject\Assets\Yamly\Plugins\Yamly.Attributes.dll" /Y
+copy "$(TargetDir)Yamly.Attributes.pdb" "$(SolutionDir)UnityProject\Assets\Yamly\Plugins\Yamly.Attributes.pdb" /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

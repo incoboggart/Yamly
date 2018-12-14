@@ -37,22 +37,37 @@ public static class DevelopmentPipeline
             exportPath = EditorUtility.SaveFilePanel("Export location", string.Empty, "yamly", "unitypackage");
         }
 
-        Func<string, string> pluginPathTo = s => $"Assets/Plugins/Yamly/{s}";
-
+        Func<string, string> pluginPathTo = s => $"Assets/Yamly/{s}";
 
         var files = new[]
         {
-            pluginPathTo("Yamly.dll"),
-            pluginPathTo("Yamly.dll.meta"),
-            pluginPathTo("Yamly.Attributes.dll"),
-            pluginPathTo("Yamly.Attributes.dll.meta"),
-            pluginPathTo("Editor/Yamly.Generate.dll"),
-            pluginPathTo("Editor/Yamly.Generate.dll.meta"),
-            pluginPathTo("Editor/YamlDotNet.dll"),
-            pluginPathTo("Editor/YamlDotNet.dll.meta"),
+            pluginPathTo("Plugins/YamlDotNet.dll"),
+            pluginPathTo("Plugins/YamlDotNet.dll.meta"),
+            pluginPathTo("Plugins/YamlDotNet.xml"),
+            pluginPathTo("Plugins/YamlDotNet.xml.meta"),
+            
+            pluginPathTo("Plugins/Yamly.Attributes.dll"),
+            pluginPathTo("Plugins/Yamly.Attributes.dll.meta"),
+            pluginPathTo("Plugins/Yamly.Attributes.dll.mdb"),
+            pluginPathTo("Plugins/Yamly.Attributes.dll.mdb.meta"),
+            pluginPathTo("Plugins/Yamly.Attributes.pdb"),
+            pluginPathTo("Plugins/Yamly.Attributes.pdb.meta"),
+            
+            pluginPathTo("Plugins/Yamly.dll"),
+            pluginPathTo("Plugins/Yamly.dll.meta"),
+            pluginPathTo("Plugins/Yamly.dll.mdb"),
+            pluginPathTo("Plugins/Yamly.dll.mdb.meta"),
+            pluginPathTo("Plugins/Yamly.pdb"),
+            pluginPathTo("Plugins/Yamly.pdb.meta"),
+            
+            pluginPathTo("Plugins/YamlySettings.asset"),
+            pluginPathTo("Plugins/YamlySettings.asset.meta"),
+            
+            pluginPathTo("Editor"),
+            pluginPathTo("Editor.meta"),
         };
         
-        AssetDatabase.ExportPackage(files, exportPath, ExportPackageOptions.IncludeDependencies);
+        AssetDatabase.ExportPackage(files, exportPath, ExportPackageOptions.IncludeDependencies|ExportPackageOptions.Recurse);
     }
     
     [MenuItem("Yamly/Dev/Clear editor prefs")]

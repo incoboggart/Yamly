@@ -34,24 +34,22 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.2.17f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigGroupAttribute.cs" />
     <Compile Include="FolderSource.cs" />
+    <Compile Include="FolderSourceDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy\DictionaryProxy.cs" />
-    <Compile Include="Proxy\Extensions.cs" />
     <Compile Include="Proxy\ListProxy.cs" />
     <Compile Include="Proxy\NullableProxy.cs" />
     <Compile Include="Proxy\ProxyUtility.cs" />
-    <Compile Include="FolderSourceDefinition.cs" />
     <Compile Include="SingleSource.cs" />
-    <Compile Include="StorageBase.cs" />
     <Compile Include="Storage.cs" />
+    <Compile Include="StorageBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Yamly.Attributes\Yamly.Attributes.csproj">
@@ -61,10 +59,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)Yamly.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.dll" /Y
-
-copy "$(TargetDir)Yamly.pdb" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.pdb" /Y
-copy "$(TargetDir)Yamly.Attributes.dll" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.Attributes.dll" /Y
-copy "$(TargetDir)Yamly.Attributes.pdb" "$(SolutionDir)UnityProject\Assets\Plugins\Yamly\Yamly.Attributes.pdb" /Y</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)Yamly.dll" "$(SolutionDir)UnityProject\Assets\Yamly\Plugins\Yamly.dll" /Y
+copy "$(TargetDir)Yamly.pdb" "$(SolutionDir)UnityProject\Assets\Yamly\Plugins\Yamly.pdb" /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>

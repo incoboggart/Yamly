@@ -2,6 +2,8 @@
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configs", "Configs.csproj", "{C3AD214E-5A85-6243-9769-0F6AFA22F84B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yamly.Generate", "Yamly.Generate.csproj", "{392E59B9-129F-F930-888E-7B6B300AFE38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,6 +14,10 @@ Global
 		{C3AD214E-5A85-6243-9769-0F6AFA22F84B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3AD214E-5A85-6243-9769-0F6AFA22F84B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3AD214E-5A85-6243-9769-0F6AFA22F84B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392E59B9-129F-F930-888E-7B6B300AFE38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392E59B9-129F-F930-888E-7B6B300AFE38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392E59B9-129F-F930-888E-7B6B300AFE38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392E59B9-129F-F930-888E-7B6B300AFE38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

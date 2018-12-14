@@ -19,16 +19,21 @@
 // SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 
 namespace Yamly
 {
     public sealed class AssetDictionaryAttribute
         : AssetDeclarationAttributeBase
     {
-        public override bool IsSingle => false;
-        
+        public override bool GetIsSingleFile() => IsSingleFile;
+        public override DeclarationType GetDeclarationType() => DeclarationType.Dictionary;
+
         public Type KeySourceType { get; }
         public bool UseAssetFileNameAsKey { get; }
+
+        public bool IsSingleFile { get; set; } = false;
+        public Type KeyType { get; set; }
 
         public AssetDictionaryAttribute(string group, bool useAssetFileNameAsKey = false, Type keySourceType = null) 
             : base(group)

@@ -156,8 +156,8 @@ namespace Yamly.Proxy
 
         public TValue this[TKey key]
         {
-            get => _dictionary[key];
-            set => _dictionary[key] = value;
+            get { return _dictionary[key]; }
+            set { _dictionary[key] = value; }
         }
 
         public ICollection<TKey> Keys => _dictionary.Keys;

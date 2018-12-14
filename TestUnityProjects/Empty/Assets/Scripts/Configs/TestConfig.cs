@@ -4,8 +4,8 @@ using UnityEngine;
 
 using Yamly;
 
-//[SingleAsset("Test")]
-//   public class TestConfig
-//   {
-//   
-//   }
+[SingleAsset("Test")]
+  public class TestConfig
+  {
+  
+  }

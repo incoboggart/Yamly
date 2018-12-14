@@ -39,9 +39,9 @@ namespace Yamly
         [HideInInspector]
         private List<StorageBase> _storages = new List<StorageBase>();
 
-        internal List<StorageBase> Storages => _storages;
+        public List<StorageBase> Storages => _storages;
 
-        internal List<string> ExcludedGroups => _excludeGroups;
+        public List<string> ExcludedGroups => _excludeGroups;
 
         public bool Includes(string group)
         {
@@ -64,13 +64,13 @@ namespace Yamly
             return storage != null ? storage.Get<T>() : default(T);
         }
 
-        internal void Cleanup()
+        public void Cleanup()
         {
             _storages = _storages.Where(s => s != null)
                 .ToList();
         }
 
-        internal void SetStorage(string group, StorageBase storage)
+        public void SetStorage(string group, StorageBase storage)
         {
             if (_excludeGroups.Contains(group))
             {

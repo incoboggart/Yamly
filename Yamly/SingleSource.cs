@@ -52,7 +52,7 @@ namespace Yamly
 
         public TextAsset[] Assets
         {
-            get { return _assets;}
+            get { return _assets; }
             set { _assets = value; }
         }
 
@@ -68,15 +68,12 @@ namespace Yamly
 
                 return asset;
             }
-            set
-            {
-                SetAsset(group, value);
-            }
+            set { SetAsset(@group, value); }
         }
 
         public override bool Contains(string group)
         {
-            return _groups.Any(g => g == group);
+            return _groups?.Any(g => g == group) ?? false;
         }
 
         public TextAsset GetAsset(string group)
@@ -128,6 +125,28 @@ namespace Yamly
             }
 
             _assets[groupIndex] = textAsset;
+        }
+
+        internal void Cleanup(IList<string> singleGroups)
+        {
+            var groups = new string[singleGroups.Count];
+            var assets = new TextAsset[singleGroups.Count];
+            
+            var index = 0;
+            for (int i = 0; i < _groups.Length; i++)
+            {
+                if (!singleGroups.Contains(_groups[i]))
+                {
+                    continue;
+                }
+
+                groups[index] = _groups[i];
+                assets[index] = _assets[i];
+                index++;
+            }
+
+            _groups = groups;
+            _assets = assets;
         }
     }
 }

@@ -28,8 +28,10 @@ namespace Yamly
     {
         private NamingConvention _namingConvention = NamingConvention.Null;
         public string Group { get; }
-        
-        public abstract bool IsSingle { get; }
+
+        public abstract bool GetIsSingleFile();
+
+        public abstract DeclarationType GetDeclarationType();
 
         public NamingConvention NamingConvention
         {
@@ -47,5 +49,10 @@ namespace Yamly
         {
             Group = group;
         }
+    }
+
+    public enum DeclarationType
+    {
+        Single, List, Dictionary
     }
 }
