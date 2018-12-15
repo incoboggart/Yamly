@@ -35,7 +35,6 @@ namespace Yamly.UnityEditor
     public sealed class StorageDefinitionEditor
         : Editor
     {
-        private static RootDefinition[] _roots;
         private static string[] _groups;
 
         private GroupsTreeView _treeView;
@@ -49,16 +48,13 @@ namespace Yamly.UnityEditor
 
         private void OnEnable()
         {
-            if (_roots == null)
+            if (_groups == null)
             {
                 try
                 {
-                    _roots = new ProxyCodeGenerator { TargetAssemblies = AppDomain.CurrentDomain.GetAssemblies() }
-                        .GetRootDefinitions()
-                        .ToArray();
-                    _groups = _roots
-                        .SelectMany(r => r.Attributes)
-                        .Select(a => a.Group)
+                    Context.Init();
+                    
+                    _groups = Context.Groups
                         .Distinct()
                         .ToArray();
                 }
@@ -69,11 +65,11 @@ namespace Yamly.UnityEditor
                         Debug.LogException(e);
                     }
 
-                    _roots = null;
+                    _groups = null;
                 }
             }
 
-            if (_roots == null)
+            if (_groups == null)
             {
                 return;
             }
@@ -92,8 +88,8 @@ namespace Yamly.UnityEditor
         
         public override void OnInspectorGUI()
         {
-            if (_roots == null
-                || _roots.Length == 0)
+            if (_groups == null
+                || _groups.Length == 0)
             {
                 DrawEmpty();
                 return;

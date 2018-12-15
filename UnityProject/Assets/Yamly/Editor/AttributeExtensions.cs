@@ -25,7 +25,7 @@ using System.Reflection;
 
 namespace Yamly.Proxy
 {
-    internal static class Extensions
+    internal static class AttributeExtensions
     {
         public static bool Have<T>(this ICustomAttributeProvider type, bool inherit = false)
             where T : Attribute

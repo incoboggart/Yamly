@@ -37,6 +37,11 @@ namespace Yamly.UnityEditor
             var fileName = Path.GetFileName(path);
             return path.Replace(fileName, filename);
         }
+        
+        public static bool IsProjectPath(this string path)
+        {
+            return path.StartsWith(Application.dataPath);
+        }
 
         public static string ToSystemPath(this string assetsPath)
         {

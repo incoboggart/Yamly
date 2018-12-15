@@ -109,7 +109,7 @@ namespace Yamly.UnityEditor
             
             foreach (var assetPath in route.GetAssetPaths().Distinct())
             {
-                var textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(assetPath);
+                var textAsset = Context.GetAsset<TextAsset>(assetPath);
                 if (textAsset != null)
                 {
                     var namingConvention = route.Attribute.GetNamingConvention();

@@ -37,16 +37,10 @@ namespace Yamly.CodeGeneration
 {
     internal sealed class ProxyAssemblyBuilder
     {
-        private readonly ProxyCodeGenerator _proxyCodeGenerator = new ProxyCodeGenerator();
+        private readonly ProxyCodeGenerator _proxyCodeGenerator = new ProxyCodeGenerator(Context.Roots);
         private readonly CompilerParameters _compilerParameters = new CompilerParameters();
 
         public string TargetNamespace { get; set; } = "Yamly.Generated";
-
-        public Assembly[] TargetAssemblies
-        {
-            get { return _proxyCodeGenerator.TargetAssemblies; }
-            set { _proxyCodeGenerator.TargetAssemblies = value; }
-        }
 
         public string OutputAssembly
         {
@@ -67,12 +61,7 @@ namespace Yamly.CodeGeneration
         }
 
         public CompilerResults CompilerResults { get; private set; }
-        public Assembly[] IgnoreAssemblies
-        {
-            get { return _proxyCodeGenerator.IgnoreAssemblies; }
-            set { _proxyCodeGenerator.IgnoreAssemblies = value; }
-        }
-
+        
         private readonly List<Type> _ignoreAttributeTypes = new List<Type>();
         private readonly List<string> _ignoredAttributeNames = new List<string>();
 
@@ -159,17 +148,13 @@ namespace Yamly.CodeGeneration
         {
             var sourceCode = new StringBuilder();
 
-            var groups = _proxyCodeGenerator.RootDefinitions.SelectMany(r => r.Attributes)
-                .Select(a => a.Group)
-                .Distinct()
-                .Where(CodeGenerationUtility.IsValidGroupName)
-                .ToArray();
+            var groups = Context.Groups;
 
             sourceCode.AppendLine($"namespace {TargetNamespace}");
             sourceCode.AppendLine("{");
             sourceCode.AppendLine("public enum Assets");
             sourceCode.AppendLine("{");
-            for (var i = 0; i < groups.Length; i++)
+            for (var i = 0; i < groups.Count; i++)
             {
                 sourceCode.Append(CodeGenerationUtility.GetGroupName(groups[i])).AppendLine(",");
             }
@@ -201,18 +186,12 @@ namespace Yamly.CodeGeneration
 
         private CodeCompileUnit GenerateStorageExtensionMethods()
         {
-            var sourceCode = new StringBuilder();
-
-            var groups = _proxyCodeGenerator.RootDefinitions.SelectMany(r => r.Attributes)
-                .Select(a => a.Group)
-                .Distinct()
-                .Where(CodeGenerationUtility.IsValidGroupName)
-                .ToArray();
+            var sourceCode = new StringBuilder();           
 
             var g = new Dictionary<string, Type>();
-            foreach (var definition in _proxyCodeGenerator.RootDefinitions)
+            foreach (var definition in Context.Roots)
             {
-                foreach (var attribute in definition.Attributes)
+                foreach (var attribute in definition.ValidAttributes)
                 {
                     switch (attribute.GetDeclarationType())
                     {
@@ -267,7 +246,8 @@ namespace Yamly.CodeGeneration
             sourceCode.AppendLine("return s.Contains<T>(asset.ToGroupName());");
             sourceCode.AppendLine("}");
 
-            for (var i = 0; i < groups.Length; i++)
+            var groups = Context.Groups;
+            for (var i = 0; i < groups.Count; i++)
             {
                 var group = groups[i];
                 var groupName = CodeGenerationUtility.GetGroupName(group);
@@ -288,16 +268,10 @@ namespace Yamly.CodeGeneration
         {
             var sourceCode = new StringBuilder();
 
-            var groups = _proxyCodeGenerator.RootDefinitions.SelectMany(r => r.Attributes)
-                .Select(a => a.Group)
-                .Distinct()
-                .Where(CodeGenerationUtility.IsValidGroupName)
-                .ToArray();
-
             var groupType = new Dictionary<string, Type>();
-            foreach (var definition in _proxyCodeGenerator.RootDefinitions)
+            foreach (var definition in Context.Roots)
             {
-                foreach (var attribute in definition.Attributes)
+                foreach (var attribute in definition.ValidAttributes)
                 {
                     switch (attribute.GetDeclarationType())
                     {

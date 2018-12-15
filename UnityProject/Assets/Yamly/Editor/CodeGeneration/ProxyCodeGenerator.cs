@@ -29,34 +29,19 @@ namespace Yamly.CodeGeneration
     internal class ProxyCodeGenerator
         : CodeGeneratorBase
     {
-        /// <summary>
-        /// Assemblies to analyze
-        /// </summary>
-        public Assembly[] TargetAssemblies { get; set; }
-
-        /// <summary>
-        /// Roots in this assemlies will be ignored
-        /// </summary>
-        public Assembly[] IgnoreAssemblies { get; set; }
-
-        public Assembly[] ReferencedAssemblies { get; private set; }
-
-        public RootDefinition[] RootDefinitions { get; private set; }
-
-        public IEnumerable<RootDefinition> GetRootDefinitions()
+        public ProxyCodeGenerator(RootDefinitonsProvider roots) 
+            : base(roots)
         {
-            return GetRootDefinitions(TargetAssemblies);
+            
         }
+        
+        public Assembly[] ReferencedAssemblies { get; private set; }
 
         protected override void Generate(StringBuilder sourceCode)
         {
-            if (IgnoreAssemblies == null)
-            {
-                IgnoreAssemblies = new Assembly[0];
-            }
-            var roots = GetRootDefinitions()
+            var roots = Roots
                 .Where(r => r.Types.Length >= 1)
-                .Where(r => IgnoreAssemblies.All(a => r.Assembly != a)).ToList();
+                .ToList();
 
             foreach (var root in roots)
             {
@@ -79,7 +64,7 @@ namespace Yamly.CodeGeneration
             {
                 namespaces.Add(GetProxyNamespaceName(root.Root));
                 namespaces.AddRange(root.Namespaces);
-                foreach (var attribute in root.Attributes)
+                foreach (var attribute in root.ValidAttributes)
                 {
                     var dictionaryAttribute = attribute as AssetDictionaryAttribute;
                     if (dictionaryAttribute == null)
@@ -136,7 +121,7 @@ namespace Yamly.CodeGeneration
                 var generated = new HashSet<string>();
                 foreach (var root in roots)
                 {
-                    foreach (var attribute in root.Attributes)
+                    foreach (var attribute in root.ValidAttributes)
                     {
                         if (!CodeGenerationUtility.IsValidGroupName(attribute.Group))
                         {
@@ -160,8 +145,6 @@ namespace Yamly.CodeGeneration
                 .Select(t => t.Assembly)
                 .Distinct()
                 .ToArray();
-
-            RootDefinitions = roots.ToArray();
         }
 
         public new string GetTypeName(Type type, bool isProxy = false)

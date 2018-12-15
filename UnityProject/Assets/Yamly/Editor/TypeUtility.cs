@@ -26,54 +26,52 @@ using System.Reflection;
 using UnityEngine;
 
 using Yamly.Proxy;
-using Yamly.UnityEditor;
 
-namespace Yamly
+namespace Yamly.CodeGeneration
 {
-    internal static class Utility
+    public static class TypeUtility
     {
-        private static readonly Type ListType = typeof(List<>);
-        private static readonly Type DictionaryType = typeof(Dictionary<,>);
+        public static readonly Type DictionaryType = typeof(Dictionary<,>);
+        public static readonly Type ListType = typeof(List<>);
+        public static readonly Type NullableType = typeof(Nullable<>);
 
-        public static bool IsSingle(this DataRoute route)
+        public static bool IsDictionaryType(this Type t)
         {
-            return route.Attribute.IsSingle();
+            return t.IsGenericType &&
+                   t.GetGenericTypeDefinition() == DictionaryType;
         }
 
-        public static bool IsSingle(this AssetDeclarationAttributeBase attribute)
+        public static bool IsListType(this Type t)
         {
-            return attribute.GetIsSingleFile()
-                   || attribute.GetDeclarationType() == DeclarationType.Single;
+            return t.IsGenericType &&
+                   t.GetGenericTypeDefinition() == ListType;
         }
 
-        public static Type GetValueType(this DataRoute route)
+        public static bool IsNullableType(this Type t)
         {
-            switch (route.Attribute.GetDeclarationType())
-            {
-                case DeclarationType.Single:
-                    return route.RootType;
-                case DeclarationType.List:
-                    return route.Attribute.GetIsSingleFile()
-                        ? ListType.MakeGenericType(route.RootType)
-                        : route.RootType;
-                case DeclarationType.Dictionary:
-                    if (!route.Attribute.GetIsSingleFile())
-                    {
-                        return route.RootType;
-                    }
-                    
-                    var dictionaryAttribute = (AssetDictionaryAttribute) route.Attribute;                   
-                    var keyType = dictionaryAttribute.KeyType;
-                    if (keyType == null)
-                    {
-                        goto default;
-                    }
-                    
-                    var valueType = route.RootType;
-                    return DictionaryType.MakeGenericType(keyType, valueType);
-                default:
-                    return null;
-            }
+            return t.IsGenericType
+                   && t.GetGenericTypeDefinition() == NullableType;
+        }
+
+        public static readonly ICollection<Type> NativeTypes = new HashSet<Type>
+        {
+            typeof(byte),
+            typeof(sbyte),
+            typeof(ushort),
+            typeof(short),
+            typeof(uint),
+            typeof(int),
+            typeof(ulong),
+            typeof(long),
+            typeof(float),
+            typeof(double),
+            typeof(string)
+        };
+
+        public static bool IsNative(this Type t)
+        {
+            return t.IsEnum
+                   || NativeTypes.Contains(t);
         }
 
         public static MethodInfo GetKeySourceMethodInfo(this Type rootType, AssetDictionaryAttribute attribute)
@@ -196,18 +194,18 @@ namespace Yamly
 
             return null;
         }
-
+        
+        private static MethodInfo _getFileNameAsKeyGenericMethodInfo;
+        
         private static MethodInfo GetFileNameAsKey(Type type)
         {
             if (_getFileNameAsKeyGenericMethodInfo == null)
             {
-                _getFileNameAsKeyGenericMethodInfo = typeof(Utility).GetMethod(nameof(GetFileNameAsKeyGeneric), BindingFlags.Static|BindingFlags.NonPublic);
+                _getFileNameAsKeyGenericMethodInfo = typeof(TypeUtility).GetMethod(nameof(GetFileNameAsKeyGeneric), BindingFlags.Static|BindingFlags.NonPublic);
             }
 
             return _getFileNameAsKeyGenericMethodInfo.MakeGenericMethod(type);
         }
-
-        private static MethodInfo _getFileNameAsKeyGenericMethodInfo;
         
         private static string GetFileNameAsKeyGeneric<T>(TextAsset asset, T deserializedValue)
         {

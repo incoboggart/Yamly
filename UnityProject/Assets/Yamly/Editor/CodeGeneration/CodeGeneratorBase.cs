@@ -37,15 +37,13 @@ namespace Yamly.CodeGeneration
             {typeof(byte), typeof(int)},
             {typeof(sbyte), typeof(int)}
         };
+        
+        public RootDefinitonsProvider Roots { get; private set; }
 
         public string StorageOutputNamespace { get; set; } = "Yamly.Generated.Storages";
         public string ProxyOutputNamespace { get; set; } = "Yamly.Generated.Proxy";
 
         public ICollection<string> Logs { get; } = new List<string>();
-
-        protected string[] IgnoreAttributes { get; set; }
-
-        protected Type[] IgnoreAttributeTypes { get; set; }
 
         protected List<string> ListProxyGenericArguments = new List<string>();
 
@@ -53,90 +51,6 @@ namespace Yamly.CodeGeneration
 
         protected List<KeyValuePair<string, string>> DictionaryProxyGenericArguments = new List<KeyValuePair<string, string>>();
 
-        private const BindingFlags PropertyFlags = BindingFlags.Instance | BindingFlags.Public;
-
-        protected IEnumerable<RootDefinition> GetRootDefinitions(IEnumerable<Assembly> targetAssemblies)
-        {
-            var types = new List<Type>();
-            foreach (var assembly in targetAssemblies)
-            {
-                foreach (var type in assembly.GetTypes()
-                    .Where(IsRootApplicable))
-                {
-                    types.Clear();
-                    types.Add(type);
-                    types.AddRange(type.GetProperties(PropertyFlags)
-                        .Where(IsApplicable)
-                        .SelectMany(p => GetApplicableTypes(p.PropertyType))
-                        .Distinct());
-                    
-                    yield return new RootDefinition
-                    {
-                        Root = type,
-                        Attributes = type.Get<AssetDeclarationAttributeBase>().ToList(),
-                        Types = types.ToArray(),
-                        Namespaces = new[]
-                            {
-                                typeof(NullableProxy<>).Namespace,
-                                typeof(ListProxy<>).Namespace
-                            }.Concat(types.Select(t => t.Namespace).Where(s => !string.IsNullOrEmpty(s)))
-                            .Distinct()
-                            .ToArray()
-                    };
-                }
-            }
-        }
-
-        protected IEnumerable<Type> GetApplicableTypes(Type propertyType)
-        {
-            if (propertyType.IsNative())
-            {
-                yield break;
-            }
-
-            if (propertyType.IsNullableType())
-            {
-                yield break;
-            }
-
-            if (propertyType.IsArray ||
-                propertyType.IsListType() ||
-                propertyType.IsDictionaryType())
-            {
-                var genericArguments = propertyType.GetGenericArguments();
-                foreach (var genericArgument in genericArguments)
-                {
-                    foreach (var t in GetApplicableTypes(genericArgument))
-                    {
-                        yield return t;
-                    }
-                }
-
-                yield break;
-            }
-
-            if (!IsPropertyApplicable(propertyType))
-            {
-                yield break;
-            }
-
-            yield return propertyType;
-
-            foreach (var property in GetApplicableProperties(propertyType))
-            {
-                foreach (var t in GetApplicableTypes(property.PropertyType))
-                {
-                    yield return t;
-                }
-            }
-        }
-
-        protected IEnumerable<PropertyInfo> GetApplicableProperties(Type type)
-        {
-            return type.GetProperties(PropertyFlags)
-                .Where(IsApplicable);
-        }
-        
         protected string GetStorageTypeName(Type rootType, AssetDeclarationAttributeBase attribute)
         {
             var groupName = CodeGenerationUtility.GetGroupName(attribute.Group);
@@ -156,74 +70,6 @@ namespace Yamly.CodeGeneration
             return string.IsNullOrEmpty(type.Namespace) 
                 ? ProxyOutputNamespace 
                 : $"{ProxyOutputNamespace}.{type.Namespace}";
-        }
-
-        protected bool IsApplicable(PropertyInfo p)
-        {
-            return p.CanRead
-                   && p.CanWrite
-                   && IsPropertyApplicable(p.PropertyType)
-                   && !IsIgnored(p);
-        }
-
-        protected bool IsIgnored(ICustomAttributeProvider provider)
-        {
-            return provider.GetCustomAttributes(true)
-                .Any(a =>
-                {
-                    var t = a.GetType();
-                    if (IgnoreAttributes != null &&
-                        IgnoreAttributes.Any(s => s == t.Name || s == t.FullName))
-                    {
-                        return true;
-                    }
-
-                    if (IgnoreAttributeTypes != null &&
-                        IgnoreAttributeTypes.Any(it => t == it))
-                    {
-                        return true;
-                    }
-
-                    return false;
-                });
-        }
-
-        protected bool IsPropertyApplicable(Type type)
-        {
-            if (type.IsInterface ||
-                type.IsAbstract)
-            {
-                return false;
-            }
-
-            if (IsIgnored(type))
-            {
-                return false;
-            }
-
-            if (type.IsEnum
-                || type.IsNative())
-            {
-                return true;
-            }
-
-            return true;
-        }
-
-        protected bool IsRootApplicable(Type type)
-        {
-            if (type.IsInterface ||
-                type.IsAbstract)
-            {
-                return false;
-            }
-
-            if (IsIgnored(type))
-            {
-                return false;
-            }
-
-            return type.Have<AssetDeclarationAttributeBase>(false);
         }
 
         protected string GetListTypeName(string elementTypeName, bool isProxy)
@@ -526,6 +372,11 @@ namespace Yamly.CodeGeneration
         }
 
         private readonly StringBuilder _stringBuilder = new StringBuilder();
+
+        protected CodeGeneratorBase(RootDefinitonsProvider roots)
+        {
+            Roots = roots;
+        }
 
         public string TransformText()
         {
@@ -835,7 +686,7 @@ namespace Yamly.CodeGeneration
             var originTypeName = GetTypeName(type, false);
             var proxyTypeName = GetGluedTypeName(GetProxyTypeName(type));
             var properties = type.GetProperties()
-                .Where(IsApplicable)
+                .Where(Roots.IsApplicable)
                 .ToArray();
 
             Func<string, string> replacePlaceholders = f => new StringBuilder(f)

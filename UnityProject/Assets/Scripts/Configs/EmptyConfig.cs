@@ -22,7 +22,7 @@ using Yamly;
 
 namespace Configs
 {
-//    [SingleAsset("Empty")]
+    [SingleAsset("Empty")]
     public sealed class EmptyConfig
     {
     }

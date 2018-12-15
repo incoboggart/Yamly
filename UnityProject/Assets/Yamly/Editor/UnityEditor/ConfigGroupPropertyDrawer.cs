@@ -36,11 +36,10 @@ namespace Yamly.UnityEditor
     {
         private const string None = "None";
 
-        private static readonly Type StorageBaseType = typeof(StorageBase);
         private static readonly Type SingleSourceDefinitionType = typeof(SingleSource);
         private static readonly Type FolderSourceDefinitionType = typeof(FolderSource);
 
-        private static RootDefinition[] _roots;
+        private static bool _init;
         private static string[] _allGroups;
         private static string[] _singleGroups;
         private static string[] _multiGroups;
@@ -54,19 +53,16 @@ namespace Yamly.UnityEditor
         private new ConfigGroupAttribute attribute => base.attribute as ConfigGroupAttribute;
         public ConfigGroupPropertyDrawer()
         {
-            if (_roots != null)
+            if (_init)
             {
                 return;
             }
 
             try
             {
-                _roots = new ProxyCodeGenerator
-                {
-                    TargetAssemblies = AppDomain.CurrentDomain.GetAssemblies()
-                }.GetRootDefinitions().ToArray();
+                Context.Init();
                 
-                var attributes = _roots.SelectMany(r => r.Attributes).ToArray();
+                var attributes = Context.Attributes;
                 _allGroups = attributes
                     .Select(a => a.Group)
                     .Distinct()
@@ -81,6 +77,8 @@ namespace Yamly.UnityEditor
                     .Select(a => a.Group)
                     .Distinct()
                     .ToArray();
+
+                _init = true;
             }
             catch (Exception e)
             {
@@ -89,14 +87,14 @@ namespace Yamly.UnityEditor
                 {
                     Debug.LogException(e);                    
                 }
-                
-                _roots = null;
+
+                _init = false;
             }
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (_roots == null)
+            if (!_init)
             {
                 return;
             }

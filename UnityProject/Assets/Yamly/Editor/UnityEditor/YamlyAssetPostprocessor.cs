@@ -52,48 +52,9 @@ namespace Yamly.UnityEditor
         public IEnumerable<string> All => ImportedAssets.Concat(DeletedAssets).Concat(MovedAssets).Concat(MovedFromAssetPaths);
     }
 
-    internal class YamlyProjectAssemblies
-    {
-        public Assembly[] All;
-        public Assembly MainRuntimeAssembly;
-        public Assembly MainEditorAssembly;
-        public Assembly ProxyAssembly;
-        public bool IsProxyAssemblyInvalid;
-        
-        public Assembly[] TargetAssemblies => All
-            .Except(new[] {MainRuntimeAssembly, MainEditorAssembly, ProxyAssembly})
-            .ToArray();
-
-        public Assembly[] IgnoreAssemblies => All
-            .Where(a => a.Have<IgnoreAttribute>())
-            .ToArray();
-    }
-
-    internal class YamlyProjectContext
-    {
-        public Assembly ProxyAssembly;
-        public List<RootDefinition> Roots;
-        public List<Storage> Storages;
-        public List<SourceBase> Sources;
-
-        private AssetProcessor _assetProcessor;
-        private string[] _groups;
-
-        public AssetProcessor AssetProcessor => _assetProcessor ?? (_assetProcessor = new AssetProcessor(ProxyAssembly));
-
-        public string[] Groups => _groups ?? (_groups = Roots.SelectMany(r => r.Attributes)
-                                      .Select(a => a.Group)
-                                      .Where(CodeGenerationUtility.IsValidGroupName)
-                                      .Distinct()
-                                      .ToArray());
-
-    }
-
     public sealed class YamlyAssetPostprocessor 
         : AssetPostprocessor
     {       
-        private static List<RootDefinition> _roots;
-
         private const string NamespacePatternBase = @"((namespace){1}){1}[\s\S]+NamespaceName{1}(?![a-zA-Z\d])(?=[\s\S]+|{)";
         private const string ClassPatternBase = @"((internal|public|private|protected|sealed|abstract|static)?[\s\r\n\t]+){0,2}(class|struct){1}[\s\S]+ClassName{1}(?![a-zA-Z\d])(?=[\s\S]+|{)";
 
@@ -140,9 +101,11 @@ namespace Yamly.UnityEditor
         // Можем переместить хранилище. Ничего не делать.
         private static void ProcessAssets(YamlyPostprocessAssetsContext ctx)
         {
-            var assemblies = GetAssemblies();
-
-            InitRoots(assemblies);
+            Context.Init();
+            Context.ClearAssetsCache();
+            
+            var assemblies = Context.Assemblies;
+            var roots = Context.Roots;
 
             if (!_rebuildAssemblyAfterReloadScriptsPending)
             {
@@ -150,7 +113,7 @@ namespace Yamly.UnityEditor
                     || assemblies.IsProxyAssemblyInvalid
                     || string.IsNullOrEmpty(assemblies.ProxyAssembly.Location))
                 {
-                    if (_roots.Any())
+                    if (roots.Any())
                     {
                         BuildAssembly(assemblies);
                     }
@@ -161,10 +124,11 @@ namespace Yamly.UnityEditor
             var codeAssets = AssetDatabase.FindAssets($"t:{nameof(TextAsset)}")
                 .Select(AssetDatabase.GUIDToAssetPath)
                 .Where(p => p.EndsWith(".cs"))
-                .Select(AssetDatabase.LoadAssetAtPath<TextAsset>)
+                .Select(Context.GetAsset<TextAsset>)
                 .ToArray();
 
-            var codeFilePaths = _roots.SelectMany(r => GetCodeFiles(r, codeAssets))
+            var codeFilePaths = Context.Roots
+                .SelectMany(r => GetCodeFiles(r, codeAssets))
                 .Distinct()
                 .ToList();
             
@@ -216,36 +180,69 @@ namespace Yamly.UnityEditor
                 return;
             }
             
-            if (_roots.Count == 0)
+            if (roots.Count == 0)
             {
                 return;
             }
 
-            var sourceDefinitions = AssetUtility.LoadAll<FolderSource>()
-                .Cast<SourceBase>()
-                .Concat(AssetUtility.LoadAll<SingleSource>())
-                .ToList();
-            if (sourceDefinitions.Count == 0)
+            var sources = Context.Sources;
+            if (sources.Count == 0)
             {
                 return;
             }
 
-            var groups = _roots.SelectMany(r => r.Attributes)
-                .Select(a => a.Group)
-                .Distinct()
-                .ToArray();
-            var storageDefinitions = AssetUtility.LoadAll<Storage>().ToList();
+            var groups = Context.Groups;
+            var storages = Context.Storages;
+            CleanupStorages(storages, groups);
+            
+            var routes = new List<DataRoute>();
+            foreach (var d in roots)
+            {
+                var codePaths = GetCodeFiles(d, codeAssets);
+                routes.AddRange(d.ValidAttributes.Select(a => CreateRoute(d, a, sources, storages, codePaths)));
+            }
+
+            var routesToRebuild = new List<DataRoute>();
+            
+            foreach (var assetPath in ctx.All)
+            {
+                foreach (var route in routes)
+                {
+                    if (routesToRebuild.Contains(route))
+                    {
+                        continue;
+                    }
+
+                    if (route.ContainsAsset(assetPath)
+                        || route.ContainsSource(assetPath)
+                        || route.ContainsStorage(assetPath))
+                    {
+                        routesToRebuild.Add(route);
+                    }
+                }
+            }
+            
+            foreach (var route in routesToRebuild)
+            {
+                Rebuild(route);
+            }
+
+            AssetDatabase.Refresh();
+        }
+
+        private static void CleanupStorages(List<Storage> storageDefinitions, List<string> groups)
+        {
             for (var i = 0; i < storageDefinitions.Count; i++)
             {
                 var storage = storageDefinitions[i];
                 storage.ExcludedGroups.RemoveAll(g => !groups.Contains(g));
                 foreach (var s in storage.Storages)
                 {
-                    if (s == null 
+                    if (s == null
                         || !storage.Includes(s.Group))
                     {
                         Object.DestroyImmediate(s, true);
-                        
+
                         EditorUtility.SetDirty(storage);
                     }
                 }
@@ -274,95 +271,47 @@ namespace Yamly.UnityEditor
                     Object.DestroyImmediate(asset, true);
                 }
 
-                if (haveNullAssets)
+                if (!haveNullAssets)
                 {
-                    var assetPath = storage.GetAssetPath();
-                    var storages = storage.Storages.ToArray();
-                    var storageName = storage.name;
-                    storage = Object.Instantiate(storage);
-                    storage.name = storageName;
-                    storage.Storages.Clear();
-                    foreach (var storageBase in storages)
-                    {
-                        var instance = Object.Instantiate(storageBase);
-                        instance.name = storageBase.name;
-                        
-                        storage.Storages.Add(instance);
-                    }
-                    
-                    if (Settings.VerboseLogs)
-                    {
-                        Debug.Log($"Storage at path ${assetPath} contains missing storage instances and will be overwritten.", storage);
-                    }
-                    
-                    AssetDatabase.DeleteAsset(assetPath);
-                    
-                    AssetDatabase.StartAssetEditing();
-                    {
-                        AssetDatabase.CreateAsset(storage, assetPath);
-                        foreach (var storageBase in storage.Storages)
-                        {
-                            AssetDatabase.AddObjectToAsset(storageBase, assetPath);
-                        }
-                    }
-                    AssetDatabase.StopAssetEditing();
-                    
-                    AssetDatabase.ImportAsset(assetPath);
-
-                    storageDefinitions[i] = storage;
+                    continue;
                 }
-            }
-            
-            var routes = new List<DataRoute>();
-            foreach (var d in _roots)
-            {
-                var codePaths = GetCodeFiles(d, codeAssets);
-                routes.AddRange(d.Attributes.Select(a => CreateRoute(d, a, sourceDefinitions, storageDefinitions, codePaths)));
-            }
-
-            var routesToRebuild = new List<DataRoute>();
-            
-            foreach (var assetPath in ctx.All)
-            {
-                foreach (var route in routes)
+                
+                var assetPath = storage.GetAssetPath();
+                var storages = storage.Storages.ToArray();
+                var storageName = storage.name;
+                storage = Object.Instantiate(storage);
+                storage.name = storageName;
+                storage.Storages.Clear();
+                foreach (var storageBase in storages)
                 {
-                    if (routesToRebuild.Contains(route))
-                    {
-                        continue;
-                    }
+                    var instance = Object.Instantiate(storageBase);
+                    instance.name = storageBase.name;
 
-                    if (route.ContainsAsset(assetPath)
-                        || route.ContainsSource(assetPath)
-                        || route.ContainsStorage(assetPath))
+                    storage.Storages.Add(instance);
+                }
+
+                if (Settings.VerboseLogs)
+                {
+                    Debug.Log($"Storage at path ${assetPath} contains missing storage instances and will be overwritten.",
+                        storage);
+                }
+
+                AssetDatabase.DeleteAsset(assetPath);
+
+                AssetDatabase.StartAssetEditing();
+                {
+                    AssetDatabase.CreateAsset(storage, assetPath);
+                    foreach (var storageBase in storage.Storages)
                     {
-                        routesToRebuild.Add(route);
+                        AssetDatabase.AddObjectToAsset(storageBase, assetPath);
                     }
                 }
+                AssetDatabase.StopAssetEditing();
+
+                AssetDatabase.ImportAsset(assetPath);
+
+                storageDefinitions[i] = storage;
             }
-
-            var context = new YamlyProjectContext
-            {
-                ProxyAssembly = assemblies.ProxyAssembly,
-                Storages = storageDefinitions,
-                Sources = sourceDefinitions,
-                Roots = _roots
-            };
-            foreach (var route in routesToRebuild)
-            {
-                Rebuild(route, context);
-            }
-
-            AssetDatabase.Refresh();
-        }
-
-        private static Assembly[] GetProjectAssemblies()
-        {
-            return AppDomain.CurrentDomain.GetAssemblies().Where(IsProjectAssembly).ToArray();
-        }
-
-        private static Assembly GetProxyAssembly(Assembly[] assemblies)
-        {
-            return assemblies.FirstOrDefault(a => a.Have<YamlyProxyAssemblyAttribute>());
         }
 
         private static bool IsCodeFilePath(string assetPath)
@@ -380,11 +329,13 @@ namespace Yamly.UnityEditor
             }
 
             var rebuildAssembly = false;
-            var assemblies = GetAssemblies();
+            var assemblies = Context.Assemblies;
             
             try
             {
-                InitRoots(assemblies);
+                Context.Init();
+
+                var _roots = Context.Roots;
 
                 if (assemblies.ProxyAssembly == null
                     || assemblies.IsProxyAssemblyInvalid)
@@ -411,7 +362,7 @@ namespace Yamly.UnityEditor
                         {
                             var originType = proxyType.GetSingle<ProxyAttribute>().OriginType;
                             if (originType != null
-                                && _roots.Exists(r => r.Contains(originType)))
+                                && _roots.Any(r => r.Contains(originType)))
                             {
                                 continue;
                             }
@@ -427,12 +378,13 @@ namespace Yamly.UnityEditor
                 rebuildAssembly = true;
             }
             
-            if (rebuildAssembly || YamlyEditorPrefs.IsAssemblyBuildPending)
+            if (rebuildAssembly 
+                || YamlyEditorPrefs.IsAssemblyBuildPending)
             {
                 YamlyEditorPrefs.IsAssemblyBuildPending = false;
                 _rebuildAssemblyAfterReloadScriptsPending = true;
 
-                if (_roots.Any())
+                if (Context.Roots.Any())
                 {
                     BuildAssembly(assemblies);
                 }
@@ -452,7 +404,9 @@ namespace Yamly.UnityEditor
 
         private static void CleanupStorages()
         {
-            var storageDefinitions = AssetUtility.LoadAll<Storage>().ToList();
+            Context.Init();
+            
+            var storageDefinitions = Context.Storages;
             foreach (var storageDefinition in storageDefinitions)
             {
                 var assets = AssetDatabase.LoadAllAssetsAtPath(storageDefinition.GetAssetPath());
@@ -545,13 +499,12 @@ namespace Yamly.UnityEditor
         }
 
         private static DataRoute CreateRoute(RootDefinition d,
-            AssetDeclarationAttributeBase a,
-            YamlyProjectContext c)
+            AssetDeclarationAttributeBase a)
         {
-            return CreateRoute(d, a, c.Sources, c.Storages);
+            return CreateRoute(d, a, Context.Sources, Context.Storages);
         }
 
-        private static void BuildAssembly(YamlyProjectAssemblies assemblies, bool debug = false)
+        private static void BuildAssembly(YamlyAssembliesProvider assemblies, bool debug = false)
         {
             var outputAssetsPath = CodeGenerationUtility.GetProxyAssemblyOutputPath(assemblies.ProxyAssembly);
 
@@ -565,8 +518,6 @@ namespace Yamly.UnityEditor
             var outputSystemPath = Application.dataPath.Replace("Assets", outputAssetsPath);
             var assemblyBuilder = new ProxyAssemblyBuilder
             {
-                TargetAssemblies = assemblies.TargetAssemblies,
-                IgnoreAssemblies = assemblies.IgnoreAssemblies,
                 OutputAssembly = outputSystemPath,
                 TreatWarningsAsErrors = true,
                 IncludeDebugInformation = debug
@@ -600,7 +551,7 @@ namespace Yamly.UnityEditor
                     Debug.Log($"Build utility assembly at path {outputAssetsPath}");
                 }
 
-                var groups = _roots.SelectMany(r => r.Attributes).Select(a => a.Group).Distinct().ToArray();
+                var groups = Context.Groups.ToArray();
                 var utilityBuilder = new UtilityAssemblyBuilder(groups)
                 {
                     OutputAssembly = outputSystemPath,
@@ -652,56 +603,33 @@ namespace Yamly.UnityEditor
             AssetDatabase.Refresh(ImportAssetOptions.Default);
         }
 
-        private static List<string> GetCodeFiles(RootDefinition root, TextAsset[] textAssets)
+        private static List<string> GetCodeFiles(RootDefinition root, IEnumerable<TextAsset> textAssets)
         {
             var rootAssembly = root.Root.Assembly;
-            if (IsProjectAssembly(rootAssembly) && IsProjectPath(rootAssembly.Location))
+            if (rootAssembly.IsProjectAssembly() 
+                && rootAssembly.Location.IsProjectPath())
             {
                 return new List<string>{rootAssembly.Location.ToAssetsPath()};
             }
 
             var namespaces = root.Namespaces.Select(n => new Regex(NamespacePatternBase.Replace("NamespaceName", n))).ToArray();
             var classes = root.Types.Select(t => new Regex(ClassPatternBase.Replace("ClassName", t.Name))).ToArray();
-            return textAssets.Where(a => namespaces.Any(n => n.IsMatch(a.text)))
+            return textAssets
+                .Where(a => namespaces.Any(n => n.IsMatch(a.text)))
                 .Where(a => classes.Any(c => c.IsMatch(a.text)))
                 .Select(a => a.GetAssetPath())
                 .ToList();
         }
 
-        private static bool IsProjectPath(string path)
-        {
-            return path.StartsWith(Application.dataPath);
-        }
-
-        private static bool IsProjectAssembly(Assembly assembly)
-        {
-            string location;
-            try
-            {
-                location = assembly.Location;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            location = location.Replace("\\", "/");
-
-            if (location.StartsWith(EditorApplication.applicationContentsPath))
-            {
-                return false;
-            }
-
-            return true;
-        }
-
         [MenuItem("Yamly/Generate code")]
         public static void CompileAssembly()
         {
-            var assemblies = GetAssemblies();
-            InitRoots(assemblies);
+            Context.Init();
             
-            if (_roots.Any() 
+            var assemblies = Context.Assemblies;
+            var roots = Context.Roots;
+            
+            if (roots.Any() 
                 && assemblies.IsProxyAssemblyInvalid)
             {
                 BuildAssembly(assemblies);
@@ -715,22 +643,23 @@ namespace Yamly.UnityEditor
         [MenuItem("Yamly/Validate/All", priority = 100)]
         public static void ValidateAll()
         {
-            var ctx = GetContext();
-            if (ctx == null 
-                || ctx.Groups.Length == 0)
+            Context.Init();
+            Context.ClearAssetsCache();
+
+            if (Context.Groups.Count == 0)
             {
                 return;
             }
 
             var p = 0f;
-            var s = 1f / ctx.Groups.Length;
+            var s = 1f / Context.Groups.Count;
 
-            foreach (var group in ctx.Groups)
+            foreach (var group in Context.Groups)
             {
                 EditorUtility.DisplayProgressBar("Yamly:Validate all groups", group, p);
                 try
                 {
-                    Validate(group, ctx);
+                    Validate(group);
                 }
                 catch (Exception e)
                 {
@@ -742,22 +671,25 @@ namespace Yamly.UnityEditor
             EditorUtility.ClearProgressBar();
         }
 
-        internal static void Validate(string groupName, YamlyProjectContext ctx)
+        public static void Validate(string groupName)
         {
-            if (ctx == null)
-            {
-                ctx = GetContext();
-            }
-           
-            if (ctx.Sources.Count == 0)
+            Context.Init();
+            
+            if (Context.Sources.Count == 0)
             {
                 Debug.LogWarning("No source definitions exist! Validation canceled!");
                 return;
             }
 
-            var targetRoot = _roots.Find(r => r.Contains(groupName));
+            var targetRoot = Context.Roots.Find(r => r.Contains(groupName));
             var attribute = targetRoot.Attributes.Find(a => a.Group == groupName);
-            var route = CreateRoute(targetRoot, attribute, ctx);
+            if (!attribute.IsValid())
+            {
+                Debug.LogError($"Group {groupName} is not defined well!");
+                return;
+            }
+            
+            var route = CreateRoute(targetRoot, attribute);
 
             if (route.Sources.Count == 0)
             {
@@ -765,9 +697,9 @@ namespace Yamly.UnityEditor
                 return;
             }
             
-            Debug.Log($"Validate {groupName} with {ctx.Sources.Count} sources and {ctx.Storages.Count} storages");
+            Debug.Log($"Validate {groupName} with {Context.Sources.Count} sources and {Context.Storages.Count} storages");
 
-            var result = ctx.AssetProcessor.Validate(route);
+            var result = Context.AssetProcessor.Validate(route);
             if (result.Errors.Any())
             {
                 foreach (var e in result.Errors)
@@ -781,30 +713,26 @@ namespace Yamly.UnityEditor
             }
         }
 
-        public static void Validate(string groupName)
-        {
-            Validate(groupName, null);
-        }
-
         [MenuItem("Yamly/Rebuild/All", priority = 100)]
         public static void RebuildAll()
         {
-            var ctx = GetContext();
-            if (ctx == null 
-                || ctx.Groups.Length == 0)
+            Context.Init();
+            Context.ClearAssetsCache();
+            
+            if (Context.Groups.Count == 0)
             {
                 return;
             }
-
+            
             var p = 0f;
-            var s = 1f / ctx.Groups.Length;
+            var s = 1f / Context.Groups.Count;
 
-            foreach (var group in ctx.Groups)
+            foreach (var group in Context.Groups)
             {
                 EditorUtility.DisplayProgressBar("Yamly:Validate all groups", group, p);
                 try
                 {
-                    Rebuild(group, ctx);
+                    Rebuild(group);
                 }
                 catch (Exception e)
                 {
@@ -816,8 +744,10 @@ namespace Yamly.UnityEditor
             EditorUtility.ClearProgressBar();
         }
 
-        internal static void Rebuild(DataRoute route, YamlyProjectContext ctx)
+        internal static void Rebuild(DataRoute route)
         {
+            Context.Init();
+            
             var groupName = route.Group;
             if (route.Sources.Count == 0)
             {
@@ -836,45 +766,33 @@ namespace Yamly.UnityEditor
                 Debug.Log($"Rebuild group {groupName} from {route.Sources.Count} sources to {route.Storages.Count} storages.");
             }
 
-            var result = ctx.AssetProcessor.Rebuild(route);
+            var result = Context.AssetProcessor.Rebuild(route);
             foreach (var e in result.Errors)
             {
                 Debug.LogError(e.Error, e.TextAsset);
             }
         }
 
-        internal static void Rebuild(string groupName, YamlyProjectContext ctx)
-        {
-            if (ctx == null)
-            {
-                ctx = GetContext();
-            }
-            
-            var root = ctx.Roots.Find(r => r.Contains(groupName));
-            var attribute = root.Attributes.Find(a => a.Group == groupName);
-            var route = CreateRoute(root, attribute, ctx.Sources, ctx.Storages);
-
-            Rebuild(route, ctx);
-        }
-
         public static void Rebuild(string groupName)
         {
-            Rebuild(groupName, null);
+            Context.Init();
+            
+            var root = Context.Roots.Find(r => r.Contains(groupName));
+            var attribute = root.Attributes.Find(a => a.Group == groupName);
+            if (!attribute.IsValid())
+            {
+                Debug.LogError($"Group {groupName} is not defined well!");
+                return;
+            }
+            
+            var route = CreateRoute(root, attribute, Context.Sources, Context.Storages);
+
+            Rebuild(route);
         }
         
         public static void CreateDefaultAssetOnSelection(string group)
         {
-            CreateDefaultAssetOnSelection(group, null);
-        }
-
-        internal static void CreateDefaultAssetOnSelection(string group, YamlyProjectContext ctx)
-        {
-            if (ctx == null)
-            {
-                ctx = GetContext();
-            }
-
-            var root = ctx.Roots.Find(r => r.Contains(group));
+            var root = Context.Roots.Find(r => r.Contains(group));
             var assetPath = Selection.activeObject.GetAssetPath();
             var folderPath = string.IsNullOrEmpty(System.IO.Path.GetExtension(assetPath))
                 ? assetPath
@@ -929,190 +847,6 @@ namespace Yamly.UnityEditor
 
             System.IO.File.WriteAllText(targetPath.ToSystemPath(), text);
             AssetDatabase.Refresh();
-        }
-
-        private static void InitRoots(YamlyProjectAssemblies assemblies)
-        {
-            if (_roots != null)
-            {
-                return;
-            }
-
-            var gen = new ProxyCodeGenerator
-            {
-                TargetAssemblies = assemblies.All.Except(assemblies.IgnoreAssemblies).ToArray()
-            };
-
-            _roots = new List<RootDefinition>();
-            foreach (var r in gen.GetRootDefinitions().ToList())
-            {
-                if (r.Assembly == assemblies.MainRuntimeAssembly ||
-                    r.Assembly == assemblies.MainEditorAssembly)
-                {
-                    Debug.LogWarning($"Config root {r.Root.FullName} is defined in assembly {r.Assembly.FullName}. This is not supported - please put it into separate assembly with AssemblyDefinition or manually.");
-                    continue;
-                }
-
-                _roots.Add(r);
-            }
-
-            var groups = _roots.SelectMany(r => r.Attributes)
-                .Select(a => a.Group)
-                .ToList();
-            foreach (var group in groups.Distinct())
-            {
-                if (groups.Count(g => g == group) > 1)
-                {
-                    var roots = _roots.Where(r => r.Contains(group));
-
-                    var log = new StringBuilder();
-                    log.AppendFormat("Group name \"{0}\" is declared multiple times. This is not supported.", group).AppendLine();
-                    log.AppendLine("Declarations found in these types:");
-                    foreach (var root in roots)
-                    {
-                        log.AppendFormat("{0} ({1})", root.Root.Name, root.Root.AssemblyQualifiedName).AppendLine();
-                    }
-
-                    log.AppendLine("These group will be ignored until duplication is fixed.");
-
-                    Debug.LogError(log);
-                }
-            }
-        }
-
-        private static bool IsValidGroupName(string group)
-        {
-            if (string.IsNullOrEmpty(group))
-            {
-                return false;
-            }
-
-            if (char.IsDigit(group[0]))
-            {
-                return false;
-            }
-
-            foreach (var c in group)
-            {
-                if (char.IsLetterOrDigit(c)
-                    || char.IsWhiteSpace(c)
-                    || c == '_'
-                    || c == '-')
-                {
-                    continue;
-                }
-
-                return false;
-            }
-
-            return true;
-        }
-
-        private static YamlyProjectContext GetContext()
-        {
-            var assemblies = GetProjectAssemblies();
-            var proxyAssembly = GetProxyAssembly(assemblies);
-            if (proxyAssembly == null)
-            {
-                return null;
-            }
-
-            var mainRuntimeAssembly = assemblies.FirstOrDefault(a => "Assembly-CSharp".Equals(a.GetName().Name));
-            var mainEditorAssembly = assemblies.FirstOrDefault(a => "Assembly-CSharp-Editor".Equals(a.GetName().Name));
-
-            var gen = new ProxyCodeGenerator { TargetAssemblies = assemblies };
-            var roots = new List<RootDefinition>();
-            foreach (var r in gen.GetRootDefinitions().ToList())
-            {
-                if (r.Assembly == mainEditorAssembly ||
-                    r.Assembly == mainRuntimeAssembly)
-                {
-                    Debug.LogWarning($"Config root {r.Root.FullName} is defined in assembly {r.Assembly.FullName}. This is not supported - please put it into separate assembly with AssemblyDefinition or manually.");
-                    continue;
-                }
-
-                roots.Add(r);
-            }
-
-            var groups = roots.SelectMany(r => r.Attributes)
-                .Select(a => a.Group)
-                .Where(CodeGenerationUtility.IsValidGroupName)
-                .ToList();
-            foreach (var group in groups.Distinct())
-            {
-                if (groups.Count(g => g == group) > 1)
-                {
-                    var duplicateRoots = roots.Where(r => r.Contains(group));
-
-                    var log = new StringBuilder();
-                    log.AppendFormat("Group name \"{0}\" is declared multiple times. This is not supported.", group).AppendLine();
-                    log.AppendLine("Declarations found in these types:");
-                    foreach (var root in duplicateRoots)
-                    {
-                        log.AppendFormat("{0} ({1})", root.Root.Name, root.Root.AssemblyQualifiedName).AppendLine();
-                    }
-
-                    log.AppendLine("These group will be ignored until duplication is fixed.");
-
-                    Debug.LogError(log);
-                }
-            }
-
-            var sourceDefinitions = AssetUtility.LoadAll<FolderSource>()
-                .Cast<SourceBase>()
-                .Concat(AssetUtility.LoadAll<SingleSource>())
-                .ToList();
-
-            var storageDefinitions = AssetUtility.LoadAll<Storage>().ToList();
-            return new YamlyProjectContext
-            {
-                ProxyAssembly = proxyAssembly,
-                Roots = roots,
-                Sources = sourceDefinitions,
-                Storages = storageDefinitions
-            };
-        }
-
-        private static YamlyProjectAssemblies GetAssemblies()
-        {
-            var assemblies = GetProjectAssemblies();
-            var proxyAssembly = GetProxyAssembly(assemblies);
-
-            var isProxyAssemblyInvalid = false;
-            if (proxyAssembly != null)
-            {
-                isProxyAssemblyInvalid = !IsProxyAssemblyValid(proxyAssembly);
-                
-                if (isProxyAssemblyInvalid)
-                {
-                    assemblies = assemblies.Except(new[] {proxyAssembly}).ToArray();
-                    proxyAssembly = null;
-                }
-            } 
-            
-            return new YamlyProjectAssemblies
-            {
-                All = assemblies,
-                ProxyAssembly = proxyAssembly,
-                IsProxyAssemblyInvalid = isProxyAssemblyInvalid,
-                MainRuntimeAssembly = assemblies.FirstOrDefault(a => "Assembly-CSharp".Equals(a.GetName().Name)),
-                MainEditorAssembly = assemblies.FirstOrDefault(a => "Assembly-CSharp-Editor".Equals(a.GetName().Name))
-            };
-        }
-
-        private static bool IsProxyAssemblyValid(Assembly proxyAssembly)
-        {
-            try
-            {
-                var types = proxyAssembly.GetTypes();
-                return types.Any();
-            }
-            catch (Exception)
-            {
-                
-            }
-            
-            return false; 
         }
     }
 }

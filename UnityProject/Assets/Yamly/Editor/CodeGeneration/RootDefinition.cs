@@ -34,6 +34,8 @@ namespace Yamly.CodeGeneration
 
         public Assembly Assembly => Root.Assembly;
 
+        public IEnumerable<AssetDeclarationAttributeBase> ValidAttributes => Attributes.Where(Context.IsValid);
+
         public bool Contains(string group)
         {
             return Attributes.Exists(a => a.Group == group);

@@ -73,7 +73,6 @@ namespace Yamly.CodeGeneration
             return p;
         }
 
-
         public static bool IsValidGroupName(string group)
         {
             if (string.IsNullOrEmpty(group))
