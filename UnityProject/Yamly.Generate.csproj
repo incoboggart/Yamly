@@ -80,6 +80,7 @@
     <Compile Include="Assets\Yamly\Editor\UnityEditor\TreeViewExtensions.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\YamlyAssembliesProvider.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\YamlyAssetPostprocessor.cs" />
+    <Compile Include="Assets\Yamly\Editor\UnityEditor\YamlyBuildPipeline.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\YamlyBuildPreprocessor.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\YamlyEditorPrefs.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\YamlySettings.cs" />
