@@ -1,6 +1,6 @@
 # General
 Yamly is development pipeline plugin for Unity3d.
-It allows using yaml or json text files for editing game data throug development and use that data without runtime overhead for parsing yaml/json in runtime.
+It allows using yaml or json text files for editing game data through development and use that data without runtime overhead for parsing yaml/json in runtime.
 Yamly parse all the text in edit time, validates syntax and converts all the data into scriptable object storages for runtime access.
 To make data accessible Yamly generates code in edit time, so no reflection or il emit is performed at runtime. 
 
