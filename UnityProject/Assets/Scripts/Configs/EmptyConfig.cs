@@ -20,10 +20,9 @@
 
 using Yamly;
 
-namespace Configs
-{
+
     [SingleAsset("Empty")]
     public sealed class EmptyConfig
     {
     }
-}
+

@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine;
 
 using Yamly.CodeGeneration;
+using Yamly.Proxy;
 using Yamly.UnityEditor;
 
 using Object = UnityEngine.Object;
@@ -72,6 +73,10 @@ namespace Yamly
         /// </summary>
         public static List<AssetDeclarationAttributeBase> Attributes { get; private set; }
         
+        public static List<IPostProcessAssets> PostProcessors { get; private set; }
+        
+        public static IPostProcessAssets[][] OrderedPostProcessors { get; private set; }
+        
         public static YamlyAssembliesProvider Assemblies
         {
             get
@@ -84,6 +89,8 @@ namespace Yamly
                 return _assemblies;
             }
         }
+        
+        
 
         public static AssetProcessor AssetProcessor
         {
@@ -266,6 +273,86 @@ namespace Yamly
 
                 _groups = validGroups;
                 Attributes = validAttributes;
+            }
+            catch (Exception e)
+            {
+                LogUtils.Verbose(e);
+            }
+
+            try
+            {
+                var postprocessorType = typeof(IPostProcessAssets);
+                var postprocessorTypes = assemblies.All
+                    .SelectMany(a => a.GetTypes())
+                    .Where(t => !t.IsAbstract && !t.IsInterface)
+                    .Where(t => postprocessorType.IsAssignableFrom(t))
+                    .ToList();
+
+                PostProcessors = new List<IPostProcessAssets>();
+                var ordered = new Dictionary<int, List<IPostProcessAssets>>();
+                var orders = new Dictionary<IPostProcessAssets, PostProcessOrderAttribute>();
+                var defaultOrder = new PostProcessOrderAttribute();
+                Func<int, List<IPostProcessAssets>> getGroup = i =>
+                {
+                    List<IPostProcessAssets> g;
+                    if (ordered.TryGetValue(i, out g))
+                    {
+                        return g;
+                    }
+                    g = new List<IPostProcessAssets>();
+
+                    ordered[i] = g;
+
+                    return g;
+                };
+                Func<IPostProcessAssets, PostProcessOrderAttribute> getOrder = a =>
+                {
+                    PostProcessOrderAttribute o;
+                    if (!orders.TryGetValue(a, out o)
+                        || o == null)
+                    {
+                        o = defaultOrder;
+                    }
+
+                    return o;
+                };
+                foreach (var type in postprocessorTypes)
+                {
+                    try
+                    {
+                        var instance = Activator.CreateInstance(type, type.IsNotPublic) as IPostProcessAssets;
+                        PostProcessors.Add(instance);
+
+                        var order = type.GetSingle<PostProcessOrderAttribute>()
+                            ?? defaultOrder;
+                        
+                        orders[instance] = order;
+                        
+                        getGroup(order.Group).Add(instance);
+                    }
+                    catch (Exception e)
+                    {
+                        LogUtils.Verbose(e);
+                    }
+                }
+
+                foreach (var p in ordered)
+                {
+                    p.Value.Sort((a1, a2) => getOrder(a1).Order.CompareTo(getOrder(a1).Order));
+                }
+
+                OrderedPostProcessors = new IPostProcessAssets[ordered.Count][];
+                var index = 0;
+                foreach (var groupIndex in ordered.Keys.OrderBy(k => k))
+                {
+                    var g = ordered[groupIndex];
+                    if (g == null || g.Count == 0)
+                    {
+                        continue;
+                    }
+                    OrderedPostProcessors[index] = g.ToArray();
+                    index++;
+                }
             }
             catch (Exception e)
             {

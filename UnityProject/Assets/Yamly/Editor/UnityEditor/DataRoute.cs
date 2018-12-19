@@ -35,10 +35,27 @@ namespace Yamly.UnityEditor
         public AssetDeclarationAttributeBase Attribute;
         public List<Storage> Storages;
         public List<SourceBase> Sources;
+        public object StoredValue;
 
         public string Group => Attribute.Group;
         public Type RootType => Root.Root;
         public MethodInfo KeySourceMethodInfo => RootType.GetKeySourceMethodInfo(Attribute as AssetDictionaryAttribute);
+
+        public Type DictionaryKeyType
+        {
+            get
+            {
+                var a = Attribute as AssetDictionaryAttribute;
+                if (a == null)
+                {
+                    return null;
+                }
+
+                return a.IsSingleFile 
+                    ? a.KeyType 
+                    : KeySourceMethodInfo?.ReturnType;
+            }
+        }
 
         public bool IsSingleFile => Attribute.GetIsSingleFile();
 

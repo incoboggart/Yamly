@@ -67,8 +67,11 @@
     <Compile Include="Assets\Yamly\Editor\Context.cs" />
     <Compile Include="Assets\Yamly\Editor\ConvertUtility.cs" />
     <Compile Include="Assets\Yamly\Editor\DataRouteUtility.cs" />
+    <Compile Include="Assets\Yamly\Editor\IPostProcessAssets.cs" />
     <Compile Include="Assets\Yamly\Editor\LogUtils.cs" />
+    <Compile Include="Assets\Yamly\Editor\PostProcessUtility.cs" />
     <Compile Include="Assets\Yamly\Editor\RegexCache.cs" />
+    <Compile Include="Assets\Yamly\Editor\TypeOf.cs" />
     <Compile Include="Assets\Yamly\Editor\TypeUtility.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\AssetProcessor.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\ConfigGroupPropertyDrawer.cs" />

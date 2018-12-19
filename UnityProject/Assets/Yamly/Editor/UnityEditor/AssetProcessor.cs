@@ -95,6 +95,7 @@ namespace Yamly.UnityEditor
             if (route.Storages.Any()
                 && GetStorageType(route) != null)
             {
+                route.StoredValue = result.StoredValue;
                 SetStoredValue(route, result.StoredValue);
             }
             return result;
@@ -206,7 +207,7 @@ namespace Yamly.UnityEditor
                             pairs.Add(new KeyValuePair<object, object>(k, v));
                         }
                     
-                        result.StoredValue = ConvertDictionary(pairs, methodInfo.ReturnType, route.RootType);
+                        result.StoredValue = ConvertDictionary(pairs, methodInfo.ReturnType, route.RootType);;
                     }
 
                     foreach (var pair in assetsByKey)
@@ -233,6 +234,52 @@ namespace Yamly.UnityEditor
             }
 
             return result;
+        }
+
+        public bool PostProcess(DataRoute route)
+        {
+            var anySuccess = false;
+            foreach (var postProcessGroup in Context.OrderedPostProcessors)
+            {
+                foreach (var postProcessor in postProcessGroup.Where(p => p.Group == route.Group))
+                {
+                    if (PostProcess(route, postProcessor))
+                    {
+                        anySuccess = true;
+                    }                    
+                }
+            }
+
+            if (anySuccess)
+            {
+                SetStoredValue(route, route.StoredValue);
+            }
+
+            return anySuccess;
+        }
+
+        private static bool PostProcess(DataRoute route, IPostProcessAssets processor)
+        {
+            var declarationType = processor.GetDeclarationType();
+            switch (declarationType)
+            {
+                case DeclarationType.Single:
+                {
+                    return PostProcessUtility.InvokeSingle(route.StoredValue, processor, route.RootType);;
+                }
+                case DeclarationType.List:
+                {
+                    return PostProcessUtility.InvokeList(route.StoredValue, processor, route.RootType);
+                }
+                case DeclarationType.Dictionary:
+                    var keyType = route.DictionaryKeyType;
+                    var valueType = route.RootType;
+                {
+                    return PostProcessUtility.InvokeDictionary(route.StoredValue, processor, keyType, valueType);
+                }
+            }
+
+            return false;
         }
 
         private static Func<MethodInfo, object, TextAsset, object> GetGetKeyFunc(DataRoute route, 

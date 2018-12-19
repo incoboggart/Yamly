@@ -199,6 +199,11 @@ namespace Yamly.UnityEditor
                 Rebuild(route);
             }
 
+            foreach (var route in routesToRebuild)
+            {
+                PostProcess(route);
+            }
+
             AssetDatabase.Refresh();
         }
 
@@ -734,6 +739,27 @@ namespace Yamly.UnityEditor
             }
         }
 
+        internal static void PostProcess(DataRoute route)
+        {
+            Context.Init();
+            
+            var groupName = route.Group;
+            if (route.Sources.Count == 0)
+            {
+                LogUtils.Warning($"[{groupName}]: Group have no sources.");
+                return;
+            }
+
+            if (route.Storages.Count == 0)
+            {
+                LogUtils.Warning($"[{groupName}]: Group have no storages.");
+                return;
+            }
+            
+            LogUtils.Verbose($"[{groupName}] PostProcess from {route.Sources.Count} sources to {route.Storages.Count} storages.");
+            Context.AssetProcessor.PostProcess(route);
+        }
+
         public static void Rebuild(string groupName)
         {
             Context.Init();
@@ -749,6 +775,7 @@ namespace Yamly.UnityEditor
             var route = CreateRoute(root, attribute, Context.Sources, Context.Storages);
 
             Rebuild(route);
+            PostProcess(route);
         }
         
         public static void CreateDefaultAssetOnSelection(string group)

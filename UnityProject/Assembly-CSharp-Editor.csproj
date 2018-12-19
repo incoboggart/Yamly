@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Editor\MenuItems.cs" />
+    <Compile Include="Assets\Scripts\Editor\TestPostProcessor.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>

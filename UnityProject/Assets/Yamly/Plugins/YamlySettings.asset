@@ -14,5 +14,5 @@ MonoBehaviour:
   IgnoreUnmatchedProperties: 1
   NamingConvention: 0
   BuildPreprocessorCallbackOrder: 0
-  VerboseLogs: 0
+  VerboseLogs: 1
   VerboseLogsOnBuild: 1
