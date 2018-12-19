@@ -67,6 +67,8 @@
     <Compile Include="Assets\Yamly\Editor\Context.cs" />
     <Compile Include="Assets\Yamly\Editor\ConvertUtility.cs" />
     <Compile Include="Assets\Yamly\Editor\DataRouteUtility.cs" />
+    <Compile Include="Assets\Yamly\Editor\LogUtils.cs" />
+    <Compile Include="Assets\Yamly\Editor\RegexCache.cs" />
     <Compile Include="Assets\Yamly\Editor\TypeUtility.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\AssetProcessor.cs" />
     <Compile Include="Assets\Yamly\Editor\UnityEditor\ConfigGroupPropertyDrawer.cs" />
@@ -325,9 +327,6 @@
     <Reference Include="Yamly">
       <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Assets/Yamly/Plugins/Yamly.dll</HintPath>
     </Reference>
-    <Reference Include="Yamly.Generated">
-      <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Assets/Yamly/Plugins/Yamly.Generated.dll</HintPath>
-    </Reference>
     <Reference Include="Yamly.Utility">
       <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Assets/Yamly/Plugins/Yamly.Utility.dll</HintPath>
     </Reference>
@@ -345,6 +344,9 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/0bogg/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Yamly.Generated">
+      <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Assets/Yamly/Plugins/Yamly.Generated.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.1.9f2/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

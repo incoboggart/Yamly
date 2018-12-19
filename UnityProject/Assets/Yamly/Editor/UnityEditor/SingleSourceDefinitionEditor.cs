@@ -59,11 +59,8 @@ namespace Yamly.UnityEditor
                 }
                 catch (Exception e)
                 {
-                    if (YamlySettings.Instance.VerboseLogs)
-                    {
-                        Debug.LogException(e);
-                    }
-
+                    LogUtils.Verbose(e);
+                    
                     _groups = null;
                 }   
             }

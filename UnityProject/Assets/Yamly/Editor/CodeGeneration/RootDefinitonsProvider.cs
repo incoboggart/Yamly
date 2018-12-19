@@ -18,9 +18,9 @@ namespace Yamly.CodeGeneration
 
         public Type[] IgnoreAttributeTypes { get; set; }
         
-        public List<RootDefinition> All { get; private set; }
+        public List<RootDefinition> All { get; } = new List<RootDefinition>();
         
-        public List<RootDefinition> Valid { get; private set; }
+        public List<RootDefinition> Valid { get; } = new List<RootDefinition>();
         
         public int Count => Valid.Count;
 
@@ -31,7 +31,7 @@ namespace Yamly.CodeGeneration
 
         public RootDefinitonsProvider Init(YamlyAssembliesProvider assemblies)
         {
-            All = GetRootDefinitions(assemblies.All.Except(assemblies.IgnoreAssemblies)).ToList();
+            All.AddRange(GetRootDefinitions(assemblies.All.Except(assemblies.IgnoreAssemblies)));
 
             var validAssemblies = assemblies.All
                 .Except(assemblies.IgnoreAssemblies)
@@ -42,7 +42,7 @@ namespace Yamly.CodeGeneration
                     assemblies.ProxyAssembly
                 }).ToList();
 
-            Valid = All.Where(d => validAssemblies.Contains(d.Root.Assembly)).ToList();
+            Valid.AddRange(All.Where(d => validAssemblies.Contains(d.Root.Assembly)));
             
             return this;
         }

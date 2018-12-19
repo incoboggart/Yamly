@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ using UnityEngine;
 
 using Yamly.CodeGeneration;
 using Yamly.UnityEditor;
+
+using Object = UnityEngine.Object;
 
 namespace Yamly
 {
@@ -24,13 +27,23 @@ namespace Yamly
         
         private static bool _init;
         
+        public static readonly RegexCache RegexCache = new RegexCache();
+        
         public static RootDefinitonsProvider Roots
         {
             get
             {
                 if (_roots == null)
                 {
-                    _roots = new RootDefinitonsProvider().Init(Assemblies);
+                    _roots = new RootDefinitonsProvider();
+                    try
+                    {
+                        _roots.Init(Assemblies);
+                    }
+                    catch (Exception e)
+                    {
+                        LogUtils.Verbose(e);
+                    }
                 }
 
                 return _roots;
@@ -130,14 +143,43 @@ namespace Yamly
 
         public static void ClearAssetsCache()
         {
+            LogUtils.Verbose("Context.ClearAssetsCache");
+            
             _assets.Clear();
             _sources = null;
             _storages = null;
         }
 
+        public static void Reset()
+        {
+            LogUtils.Verbose("Context.Reset");
+            
+            ClearAssetsCache();
+            _init = false;
+            _roots = null;
+            _groups = null;
+            Attributes = null;
+            _assetProcessor = null;
+            _assemblies = null;
+        }
+
         public static bool IsValid(this AssetDeclarationAttributeBase attribute)
         {
-            return Attributes.Exists(a => Equals(a, attribute) && a.Group == attribute.Group);
+            Init();
+
+            if (attribute == null)
+            {
+                return false;
+            }
+
+            if (Attributes == null)
+            {
+                return false;
+            }
+            
+            return Attributes.Exists(a => a != null 
+                                          && Equals(a, attribute) 
+                                          && a.Group == attribute.Group);
         }
         
         public static void Init()
@@ -146,6 +188,8 @@ namespace Yamly
             {
                 return;
             }
+            
+            LogUtils.Verbose("Context.Init");
 
             _init = true;
 
@@ -164,57 +208,69 @@ namespace Yamly
             {
                 return;
             }
-            
-            var roots = Roots;
-            var wellLocatedRoots = new List<RootDefinition>();
-            foreach (var r in roots.All)
+
+            try
             {
-                if(!assemblies.IsAssemblyValidForRoot(r.Assembly))
+                var roots = Roots;
+                var wellLocatedRoots = new List<RootDefinition>();
+                foreach (var r in roots.All)
                 {
-                    Debug.LogWarning($"Config root {r.Root.FullName} is defined in assembly {r.Assembly.FullName}. This is not supported - please put it into separate assembly with AssemblyDefinition or manually.");
-                    continue;
-                }
-                
-                wellLocatedRoots.Add(r);
-            }
-
-            var validGroups = new List<string>();
-            var validAttributes = new List<AssetDeclarationAttributeBase>();
-
-            var attributes = wellLocatedRoots.SelectMany(r => r.Attributes).ToList();
-            var groups = attributes.Select(a => a.Group).ToList();
-            foreach (var attribute in attributes)
-            {
-                if (groups.Count(g => g == attribute.Group) > 1)
-                {
-                    var duplicateRoots = wellLocatedRoots.Where(r => r.Contains(attribute.Group));
-
-                    var log = new StringBuilder();
-                    log.AppendFormat("Group name \"{0}\" is declared multiple times. This is not supported.", attribute.Group).AppendLine();
-                    log.AppendLine("Declarations found in these types:");
-                    foreach (var root in duplicateRoots)
+                    if (!assemblies.IsAssemblyValidForRoot(r.Assembly))
                     {
-                        log.AppendFormat("{0} ({1})", root.Root.Name, root.Root.AssemblyQualifiedName).AppendLine();
+                        LogUtils.Warning($"Config root {r.Root.FullName} is defined in assembly {r.Assembly.FullName}. This is not supported - please put it into separate assembly with AssemblyDefinition or manually.");
+                        continue;
                     }
 
-                    log.AppendLine("These group will be ignored until duplication is fixed.");
-
-                    Debug.LogError(log);
-                    continue;
+                    wellLocatedRoots.Add(r);
                 }
-                
-                if (!CodeGenerationUtility.IsValidGroupName(attribute.Group))
+
+                var validGroups = new List<string>();
+                var validAttributes = new List<AssetDeclarationAttributeBase>();
+
+                var attributes = wellLocatedRoots.SelectMany(r => r.Attributes)
+                    .ToList();
+                var groups = attributes.Select(a => a.Group)
+                    .ToList();
+                foreach (var attribute in attributes)
                 {
-                    Debug.LogError($"Group {attribute.Group} name is not valid! Group will be ignored.");
-                    continue;
-                }
-                
-                validAttributes.Add(attribute);
-                validGroups.Add(attribute.Group);
-            }
+                    if (groups.Count(g => g == attribute.Group) > 1)
+                    {
+                        var duplicateRoots = wellLocatedRoots.Where(r => r.Contains(attribute.Group));
 
-            _groups = validGroups;
-            Attributes = validAttributes;
+                        var log = new StringBuilder();
+                        log.AppendFormat("Group name \"{0}\" is declared multiple times. This is not supported.",
+                                attribute.Group)
+                            .AppendLine();
+                        log.AppendLine("Declarations found in these types:");
+                        foreach (var root in duplicateRoots)
+                        {
+                            log.AppendFormat("{0} ({1})", root.Root.Name, root.Root.AssemblyQualifiedName)
+                                .AppendLine();
+                        }
+
+                        log.AppendLine("These group will be ignored until duplication is fixed.");
+
+                        LogUtils.Error(log);
+                        continue;
+                    }
+
+                    if (!CodeGenerationUtility.IsValidGroupName(attribute.Group))
+                    {
+                        LogUtils.Error($"Group {attribute.Group} name is not valid! Group will be ignored.");
+                        continue;
+                    }
+
+                    validAttributes.Add(attribute);
+                    validGroups.Add(attribute.Group);
+                }
+
+                _groups = validGroups;
+                Attributes = validAttributes;
+            }
+            catch (Exception e)
+            {
+                LogUtils.Verbose(e);
+            }
         }
     }
 }

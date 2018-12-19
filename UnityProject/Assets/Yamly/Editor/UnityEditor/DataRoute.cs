@@ -42,11 +42,6 @@ namespace Yamly.UnityEditor
 
         public bool IsSingleFile => Attribute.GetIsSingleFile();
 
-        public bool ContainsCodeFile(string assetPath)
-        {
-            return Code.Contains(assetPath);
-        }
-
         public IEnumerable<string> GetAssetPaths()
         {
             foreach (var assetPath in FileAssetPaths.Where(AssetUtility.IsSupportedTextAssetPath))
@@ -109,8 +104,6 @@ namespace Yamly.UnityEditor
             return false;
         }
 
-        public List<string> Code;
-
         // Exact file
         public List<string> FileAssetPaths { get; } = new List<string>();
 
@@ -122,7 +115,7 @@ namespace Yamly.UnityEditor
 
         public override string ToString()
         {
-            return $"{RootType} {Attribute.GetDeclarationType()}";
+            return $"{Attribute.Group}({Attribute.GetDeclarationType()}<{RootType.Name}>)";
         }
     }
 }

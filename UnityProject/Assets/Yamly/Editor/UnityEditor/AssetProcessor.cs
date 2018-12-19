@@ -125,7 +125,7 @@ namespace Yamly.UnityEditor
                         {
                             AssetPath = assetPath,
                             TextAsset = textAsset,
-                            Error = $"{System.IO.Path.GetFileName(assetPath)} has syntax errors from {e.Start} to {e.End} for group {route.Group}"
+                            Error = $"[{route.Group}]: {System.IO.Path.GetFileName(assetPath)} has syntax errors from {e.Start} to {e.End}"
                         };
                         if (e.InnerException != null)
                         {
@@ -142,7 +142,7 @@ namespace Yamly.UnityEditor
                     errors.Add(new AssetValidationErrors
                     {
                         AssetPath = assetPath,
-                        Error = $"Failed to load TextAsset on path {assetPath}"
+                        Error = $"[{route.Group}]: Failed to load TextAsset on path {assetPath}"
                     });
                 }
             }
@@ -197,7 +197,7 @@ namespace Yamly.UnityEditor
                                 {
                                     TextAsset = p.Key,
                                     AssetPath = p.Key.GetAssetPath(),
-                                    Error = $"Asset {p.Key.name} dictionary key is invalid!"
+                                    Error = $"[{route.Group}]: Asset {p.Key.name} dictionary key is invalid!"
                                 });
                                 continue;
                             }
@@ -223,7 +223,7 @@ namespace Yamly.UnityEditor
                             {
                                 TextAsset = asset,
                                 AssetPath = asset.GetAssetPath(),
-                                Error = $"{asset.name} contains duplicate dictionary key {pair.Key} for {route.Attribute.Group}! This will result in keys override and errors!"
+                                Error = $"[{route.Group}]: {asset.name} contains duplicate dictionary key {pair.Key}! This will result in keys override and errors!"
                             });
                         }
                     }

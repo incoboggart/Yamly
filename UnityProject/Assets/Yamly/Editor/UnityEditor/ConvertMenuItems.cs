@@ -175,7 +175,7 @@ namespace Yamly.UnityEditor
                 }
                 catch (Exception e)
                 {
-                    Debug.LogException(e);
+                    LogUtils.Error(e);
                 }         
             }
             AssetDatabase.StopAssetEditing();
@@ -220,7 +220,7 @@ namespace Yamly.UnityEditor
                 }
                 catch (Exception e)
                 {
-                    Debug.LogException(e);
+                    LogUtils.Error(e);
                 }         
             }
             AssetDatabase.StopAssetEditing();

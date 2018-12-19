@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: YamlySettings
   m_EditorClassIdentifier: 
   IgnoreUnmatchedProperties: 1
-  NamingConvention: 0
+  NamingConvention: 1
   BuildPreprocessorCallbackOrder: 0
-  VerboseLogs: 1
+  VerboseLogs: 0
   VerboseLogsOnBuild: 1

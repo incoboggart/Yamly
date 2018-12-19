@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Yamly.CodeGeneration
 {
@@ -34,6 +35,21 @@ namespace Yamly.CodeGeneration
 
         public Assembly Assembly => Root.Assembly;
 
+        private Regex[] _codeRegex;
+
+        public Regex[] GetCodeRegex(RegexCache cache)
+        {
+            if (_codeRegex != null)
+            {
+                return _codeRegex;
+            }
+
+            _codeRegex = Namespaces.Select(cache.GetNamespaceRegex)
+                .Concat(Types.Select(cache.GetTypeRegex))
+                .ToArray();
+            return _codeRegex;
+        }
+
         public IEnumerable<AssetDeclarationAttributeBase> ValidAttributes => Attributes.Where(Context.IsValid);
 
         public bool Contains(string group)
@@ -44,11 +60,6 @@ namespace Yamly.CodeGeneration
         public bool Contains(Type type)
         {
             return Root == type || Types.Any(t => t == type);
-        }
-
-        public void Remove(string group)
-        {
-            Attributes.RemoveAll(a => a.Group == group);
         }
 
         public override string ToString()

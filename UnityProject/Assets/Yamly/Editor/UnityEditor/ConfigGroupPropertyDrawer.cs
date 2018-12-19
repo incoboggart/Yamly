@@ -83,10 +83,7 @@ namespace Yamly.UnityEditor
             catch (Exception e)
             {
                 // We can crash here when user deletes one of root types. 
-                if (YamlySettings.Instance.VerboseLogs)
-                {
-                    Debug.LogException(e);                    
-                }
+                LogUtils.Verbose(e);
 
                 _init = false;
             }

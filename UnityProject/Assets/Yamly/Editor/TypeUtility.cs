@@ -122,7 +122,7 @@ namespace Yamly.CodeGeneration
                 {
                     if (!propertyInfo.CanRead)
                     {
-                        Debug.LogError($"Property {propertyInfo.Name} is not readable and have {nameof(DictionaryKeyAttribute)}. It will be ignored.");
+                        LogUtils.Error($"Property {propertyInfo.Name} is not readable and have {nameof(DictionaryKeyAttribute)}. It will be ignored.");
                         continue;
                     }
 
@@ -168,7 +168,7 @@ namespace Yamly.CodeGeneration
                     if (parameters.Length == 1
                         && parameters[0].ParameterType != rootType)
                     {
-                        Debug.LogError($"Method {methodInfo.Name} is not valid for selecting keys! Type {rootType.Name} is not assignable from param type {parameters[0].ParameterType.Name}.");
+                        LogUtils.Error($"Method {methodInfo.Name} is not valid for selecting keys! Type {rootType.Name} is not assignable from param type {parameters[0].ParameterType.Name}.");
                         continue;
                     }
 
@@ -178,7 +178,7 @@ namespace Yamly.CodeGeneration
                         if (parameterInfo.ParameterType != rootType
                             && parameterInfo.ParameterType != typeof(TextAsset))
                         {
-                            Debug.LogError($"Method {methodInfo.Name} is not valid for selecting keys! Method have invalid param type {parameterInfo.ParameterType}");
+                            LogUtils.Error($"Method {methodInfo.Name} is not valid for selecting keys! Method have invalid param type {parameterInfo.ParameterType}");
                             isValid = false;
                         }
                     }

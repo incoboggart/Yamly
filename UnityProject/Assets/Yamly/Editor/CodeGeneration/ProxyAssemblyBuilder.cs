@@ -130,7 +130,7 @@ namespace Yamly.CodeGeneration
             {
                 foreach (var log in _proxyCodeGenerator.Logs)
                 {
-                    UnityEngine.Debug.Log(log);
+                    LogUtils.Verbose(log);
                 }
             }
 
@@ -250,6 +250,11 @@ namespace Yamly.CodeGeneration
             for (var i = 0; i < groups.Count; i++)
             {
                 var group = groups[i];
+                if (!g.ContainsKey(group))
+                {
+                    continue;
+                }
+                
                 var groupName = CodeGenerationUtility.GetGroupName(group);
                 var typeName = _proxyCodeGenerator.GetTypeName(g[group]);
                 sourceCode.AppendLine($"public static {typeName} Get{groupName}(this Storage s)");

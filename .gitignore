@@ -268,3 +268,5 @@ UnityProject/Assets/Plugins/Editor/JetBrains.meta
 TestUnityProjects/Empty/Library/
 TestUnityProjects/Empty/Temp/
 TestUnityProjects/Empty/Assets/Plugins/Editor/JetBrains/
+*Yamly.Utility.dll*
+*Yamly.Generated.dll*
