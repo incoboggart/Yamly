@@ -135,3 +135,45 @@ Load assets dictionary.
 ```
 var data = Resources.Load<Storage>(path).Get<Dictionary<string, DataClass>>("DataByLowerId");
 ```
+
+## Advanced.
+Yamly have some advanced capabilities for automating data processing:
+* Plugin settings.
+Yamly is maintaining YamlySettings asset, that contains some project space settings to edit. This asset is used strictly in edit time.
+* Utility code
+Along with usefull code, yamly is generating loads of utility code to save time. All those code can be found in Yamly.Generated namespace. It includes asset groups enumeration and JSON convert utility.
+* Build preprocessor.
+Yamly shipped with integrated build preprocessor so you dont have to upgrade your data manually on builds.
+* Data postprocessing.
+Sometimes its required to postprocess raw data for it to be fully compatible. For this purpose Yamly implements post processing pipeline. To use it one have to define editor space type that inherits one of IPostProcessAssets interfaces.
+```
+public class MyDefaultPostProcessor 
+    : IPostProcessAssetDictionary<string, MyData> 
+{
+    public void OnPostProcess(Dictionary<string, MyData> assets)
+    {
+        foreach (var pair in assets)
+        {
+            pair.Value.Byte = 253;
+        }
+    }
+
+    public string Group => Yamly.Generated.Assets.MyDataById.ToString();
+}
+```
+Postprocessors call order can be controlled with PostProcessOrderAttribute.
+```
+[PostProcessOrder(Group = 1, Order = 1)]
+public class MyOrderedPostProcessor 
+    : IPostProcessAssetDictionary<string, MyData> {
+    public void OnPostProcess(Dictionary<string, MyData> assets)
+    {
+        foreach (var pair in assets)
+            {
+                pair.Value.Byte = 255 - pair.Value.Byte; // 2
+            }
+        }
+
+        public string Group => Yamly.Generated.Assets.MyDataById.ToString();
+    }
+```
