@@ -22,7 +22,7 @@ Multiple text files, defining inventory items database, one item per file.
 In general - any case where you need some plain data (without direct asset referencing) will do.
 
 ## Installation
-Just extract asset [package](https://github.com/incoboggart/Yamly/blob/master/out/yamly-1.0.2.unitypackage?raw=true) anywhere in your project.
+Just extract asset [package](https://github.com/incoboggart/Yamly/blob/master/out/yamly-1.0.3.unitypackage?raw=true) anywhere in your project.
 Yamly is tolerant on moving its assets around, so you can change default location freely.
 
 # Compatibility  

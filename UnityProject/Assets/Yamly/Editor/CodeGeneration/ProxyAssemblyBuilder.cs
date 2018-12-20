@@ -401,6 +401,9 @@ namespace Yamly.CodeGeneration
                     LogUtils.Info($"{attribute.Group}: {inputTypeName} -> {proxyTypeName}");
                     if (declareToMethod)
                     {
+                        sourceCode.AppendLine("/// <summary>");
+                        sourceCode.AppendLine($"/// Serialize {attribute.Group} value to json");
+                        sourceCode.AppendLine("/// </summary>");
                         sourceCode.AppendLine($"public static string ToJson(this {inputTypeName} origin, bool pretty)");
                         sourceCode.AppendLine("{");
                         sourceCode.AppendLine($"var proxy = {originToProxy};");
@@ -408,8 +411,11 @@ namespace Yamly.CodeGeneration
                         sourceCode.AppendLine("}");
                         sourceCode.AppendLine();
                     }
-                    
-                    sourceCode.AppendLine($"public static {inputTypeName} FromJson{attribute.Group}(string json)");
+
+                    sourceCode.AppendLine("/// <summary>");
+                    sourceCode.AppendLine($"/// Parse json to {attribute.Group} value");
+                    sourceCode.AppendLine("/// </summary>");
+                    sourceCode.AppendLine($"public static {inputTypeName} To{attribute.Group}(string json)");
                     sourceCode.AppendLine("{");
                     sourceCode.AppendLine($"var proxy = UnityEngine.JsonUtility.FromJson<{proxyTypeName}>(json);");
                     sourceCode.AppendLine($"return {proxyToOrigin};");
