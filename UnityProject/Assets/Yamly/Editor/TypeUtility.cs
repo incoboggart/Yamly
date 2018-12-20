@@ -108,6 +108,18 @@ namespace Yamly.CodeGeneration
             return default(MethodInfo);
         }
 
+        public static Type GetDictionaryKeyType(this Type rootType, AssetDictionaryAttribute a)
+        {
+            if (a == null)
+            {
+                return null;
+            }
+
+            return a.IsSingleFile 
+                ? a.KeyType 
+                : rootType.GetKeySourceMethodInfo(a)?.ReturnType;
+        }
+
         private static MethodInfo GetPropertyKeySourceMethodInfo(Type rootType, AssetDictionaryAttribute attribute, bool allowGeneral)
         {
             foreach (var propertyInfo in rootType.GetProperties())

@@ -43,7 +43,7 @@ MonoBehaviour:
     _values:
     - NotNull: 1
       Id: DefValues
-      Byte: 0
+      Byte: 253
       NByte:
         HasValue: 0
         Value: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
         _values: 
     - NotNull: 1
       Id: MaxValues
-      Byte: 255
+      Byte: 253
       NByte:
         HasValue: 1
         Value: 255
@@ -406,7 +406,7 @@ MonoBehaviour:
         _values: 01000000
     - NotNull: 1
       Id: MinValues
-      Byte: 0
+      Byte: 253
       NByte:
         HasValue: 1
         Value: 0
@@ -595,7 +595,7 @@ MonoBehaviour:
         _values: 00000000
     - NotNull: 1
       Id: Test
-      Byte: 0
+      Byte: 253
       NByte:
         HasValue: 0
         Value: 0

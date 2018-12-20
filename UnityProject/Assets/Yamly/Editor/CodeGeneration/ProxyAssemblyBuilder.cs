@@ -22,6 +22,7 @@ using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -102,6 +103,7 @@ namespace Yamly.CodeGeneration
             referencedAssemblies.Add(typeof(AssetDeclarationAttributeBase).Assembly.Location.ToUnityPath());
             referencedAssemblies.Add(typeof(ISerializationCallbackReceiver).Assembly.Location.ToUnityPath());
             referencedAssemblies.Add(typeof(ScriptableObject).Assembly.Location.ToUnityPath());
+            referencedAssemblies.Add(typeof(JsonUtility).Assembly.Location.ToUnityPath());
             
             _compilerParameters.GenerateExecutable = false;
             _compilerParameters.GenerateInMemory = false;
@@ -124,7 +126,7 @@ namespace Yamly.CodeGeneration
 
         private CodeCompileUnit GenerateProxy()
         {
-            var sourceCode = _proxyCodeGenerator.TransformText();
+            var sourceCode = _proxyCodeGenerator.GenerateProxySourceCode();
 
             if (YamlySettings.Instance.VerboseLogs)
             {
@@ -305,17 +307,120 @@ namespace Yamly.CodeGeneration
                 }
             }
 
+            var listGenericType = typeof(List<>);
+            var dictionaryGenericType = typeof(Dictionary<,>);
+            
+            var declaredInputTypes = new List<Type>();
+
+            var namespaces = new List<string>();
+            namespaces.Add(typeof(string).Namespace);
+            namespaces.Add(typeof(List<>).Namespace);
+            namespaces.Add(typeof(ProxyUtility).Namespace);
+            namespaces.Add(_proxyCodeGenerator.ProxyOutputNamespace);
+            namespaces.Add(_proxyCodeGenerator.StorageOutputNamespace);
+            foreach (var root in Context.Roots)
+            {
+                if (root.Root.Namespace != null)
+                {
+                    namespaces.Add(root.Root.Namespace);
+                }
+
+                namespaces.Add(_proxyCodeGenerator.GetProxyNamespaceName(root.Root));
+            }
+           
+            foreach (var ns in namespaces.Distinct())
+            {
+                sourceCode.AppendLine($"using {ns};");                
+            }
+            
             sourceCode.AppendLine($"namespace {TargetNamespace}");
             sourceCode.AppendLine("{");
-            sourceCode.AppendLine("using System.Collections.Generic;");
-            sourceCode.AppendLine($"using {_proxyCodeGenerator.StorageOutputNamespace};");
-            sourceCode.AppendLine($"using {_proxyCodeGenerator.ProxyOutputNamespace};");
-            sourceCode.AppendLine("public static class ProxyJsonExtensions");
+            sourceCode.AppendLine("public static class JsonUtility");
             sourceCode.AppendLine("{");
-            
+            foreach (var root in Context.Roots)
+            {
+                foreach (var attribute in root.Attributes.Where(a => a.IsValid()))
+                {
+                    string inputTypeName = null;
+                    string proxyTypeName = null;
+                    string proxyToOrigin = null;
+                    string originToProxy = null;
+                    bool declareToMethod = false;
+                    const string proxy = "proxy";
+                    const string origin = "origin";
+                    switch (attribute.GetDeclarationType())
+                    {
+                            case DeclarationType.Single:
+                                var singleType = root.Root;
+                                inputTypeName = _proxyCodeGenerator.GetTypeName(singleType);
+                                proxyTypeName = _proxyCodeGenerator.GetTypeName(singleType, true);
+                                proxyTypeName = _proxyCodeGenerator.GetGluedTypeName(proxyTypeName);
+                                
+                                proxyToOrigin = _proxyCodeGenerator.GetTypeConversion(singleType, proxy, false);
+                                originToProxy = _proxyCodeGenerator.GetTypeConversion(singleType, origin, true);
+                                
+                                if (!declaredInputTypes.Contains(singleType))
+                                {
+                                    declaredInputTypes.Add(singleType);
+                                    declareToMethod = true;
+                                }
+                                break;
+                            case DeclarationType.List:
+                                var elementType = root.Root;
+                                var listType = listGenericType.MakeGenericType(elementType);
+                                inputTypeName = _proxyCodeGenerator.GetTypeName(listType);
+                                proxyTypeName = _proxyCodeGenerator.GetTypeName(listType, true);
+                                
+                                proxyToOrigin = _proxyCodeGenerator.GetTypeConversion(listType, proxy, false);
+                                originToProxy = _proxyCodeGenerator.GetTypeConversion(listType, origin, true);
+                                
+                                if (!declaredInputTypes.Contains(elementType))
+                                {
+                                    declaredInputTypes.Add(elementType);
+                                    declareToMethod = true;
+                                }
+                                break;
+                            case DeclarationType.Dictionary:
+                                var keyType = root.Root.GetDictionaryKeyType(attribute as AssetDictionaryAttribute);
+                                var valueType = root.Root;
+                                var dictionaryType = dictionaryGenericType.MakeGenericType(keyType, valueType);
+                                inputTypeName = _proxyCodeGenerator.GetTypeName(dictionaryType);
+                                proxyTypeName = _proxyCodeGenerator.GetTypeName(dictionaryType, true);
+                                
+                                proxyToOrigin = _proxyCodeGenerator.GetTypeConversion(dictionaryType, proxy, false);
+                                originToProxy = _proxyCodeGenerator.GetTypeConversion(dictionaryType, origin, true);
+                                
+                                if (!declaredInputTypes.Contains(dictionaryType))
+                                {
+                                    declaredInputTypes.Add(dictionaryType);
+                                    declareToMethod = true;
+                                }
+                                break;
+                    } 
+                    
+                    LogUtils.Info($"{attribute.Group}: {inputTypeName} -> {proxyTypeName}");
+                    if (declareToMethod)
+                    {
+                        sourceCode.AppendLine($"public static string ToJson(this {inputTypeName} origin, bool pretty)");
+                        sourceCode.AppendLine("{");
+                        sourceCode.AppendLine($"var proxy = {originToProxy};");
+                        sourceCode.AppendLine("return UnityEngine.JsonUtility.ToJson(proxy, pretty);");
+                        sourceCode.AppendLine("}");
+                        sourceCode.AppendLine();
+                    }
+                    
+                    sourceCode.AppendLine($"public static {inputTypeName} FromJson{attribute.Group}(string json)");
+                    sourceCode.AppendLine("{");
+                    sourceCode.AppendLine($"var proxy = UnityEngine.JsonUtility.FromJson<{proxyTypeName}>(json);");
+                    sourceCode.AppendLine($"return {proxyToOrigin};");
+                    sourceCode.AppendLine("}");
+                }
+            }
             sourceCode.AppendLine("}");
             sourceCode.AppendLine("}");
 
+            File.WriteAllText(@"C:\Users\0bogg\Desktop\test.cs", sourceCode.ToString());
+            
             return new CodeSnippetCompileUnit(sourceCode.ToString());
         }
     }

@@ -65,7 +65,7 @@ namespace Yamly.CodeGeneration
                 : $"{t.FullName}Proxy";
         }
 
-        protected string GetProxyNamespaceName(Type type)
+        public string GetProxyNamespaceName(Type type)
         {
             return string.IsNullOrEmpty(type.Namespace) 
                 ? ProxyOutputNamespace 
@@ -192,7 +192,7 @@ namespace Yamly.CodeGeneration
                 .LastOrDefault();
         }
 
-        protected string GetGluedTypeName(string fullTypeName)
+        public string GetGluedTypeName(string fullTypeName)
         {
             return fullTypeName
                 .Replace("global::", string.Empty)
@@ -287,7 +287,7 @@ namespace Yamly.CodeGeneration
                 ?.ReturnType;
         }
 
-        protected string GetTypeConversion(Type t, 
+        public string GetTypeConversion(Type t, 
             string propertyName, 
             bool proxy, 
             int depth, 
@@ -364,7 +364,7 @@ namespace Yamly.CodeGeneration
             }
         }
 
-        protected string GetTypeConversion(Type t,
+        public string GetTypeConversion(Type t,
             string propertyName,
             bool proxy)
         {
@@ -378,7 +378,7 @@ namespace Yamly.CodeGeneration
             Roots = roots;
         }
 
-        public string TransformText()
+        public string GenerateProxySourceCode()
         {
             _stringBuilder.Clear();
             Logs.Clear();
@@ -805,7 +805,6 @@ namespace Yamly.CodeGeneration
 		    return storage == null ? default(<#=originDictionaryTypeName#>) : storage.Value;
 		}
 ";
-
             _stringBuilder
                 .AppendLine()
                 .Append(new StringBuilder(format)
@@ -816,11 +815,6 @@ namespace Yamly.CodeGeneration
                     .Replace("<#=proxyToOrigin#>", proxyToOrigin)
                     .Replace("<#=originToProxy#>", originToProxy))
                 .AppendLine();
-
-            foreach (var pair in DictionaryProxyGenericArguments)
-            {
-                DictionaryType(pair.Key, pair.Value);
-            }
         }
 
         private void SingleStorageTypeContent(RootDefinition root, string storageTypeName)
@@ -905,11 +899,6 @@ namespace Yamly.CodeGeneration
                     .Replace("<#=listOriginTypeName#>", listOriginTypeName)
                     .Replace("<#=storageTypeName#>", storageTypeName))
                 .AppendLine();
-
-            foreach (var listTypeName in ListProxyGenericArguments)
-            {
-                ListType(listTypeName);
-            }
         }
 
         public void StorageType(RootDefinition root, AssetDeclarationAttributeBase attribute)

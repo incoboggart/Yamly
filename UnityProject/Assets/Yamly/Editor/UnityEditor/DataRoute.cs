@@ -41,21 +41,7 @@ namespace Yamly.UnityEditor
         public Type RootType => Root.Root;
         public MethodInfo KeySourceMethodInfo => RootType.GetKeySourceMethodInfo(Attribute as AssetDictionaryAttribute);
 
-        public Type DictionaryKeyType
-        {
-            get
-            {
-                var a = Attribute as AssetDictionaryAttribute;
-                if (a == null)
-                {
-                    return null;
-                }
-
-                return a.IsSingleFile 
-                    ? a.KeyType 
-                    : KeySourceMethodInfo?.ReturnType;
-            }
-        }
+        public Type DictionaryKeyType => RootType.GetDictionaryKeyType(Attribute as AssetDictionaryAttribute);
 
         public bool IsSingleFile => Attribute.GetIsSingleFile();
 

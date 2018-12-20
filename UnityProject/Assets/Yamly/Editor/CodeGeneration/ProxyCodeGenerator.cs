@@ -118,7 +118,8 @@ namespace Yamly.CodeGeneration
                 DictionaryProxyGenericArguments.Clear();
                 NullableProxyGenericArguments.Clear();
 
-                var generated = new HashSet<string>();
+                var definedStorageTypeNames = new HashSet<string>();
+                var definedCollectionTypeNames = new HashSet<string>();
                 foreach (var root in roots)
                 {
                     foreach (var attribute in root.ValidAttributes)
@@ -129,14 +130,44 @@ namespace Yamly.CodeGeneration
                         }
 
                         var storageTypeName = GetStorageTypeName(root.Root, attribute);
-                        if (generated.Contains(storageTypeName))
+                        if (definedStorageTypeNames.Contains(storageTypeName))
                         {
                             continue;
                         }
 
                         StorageType(root, attribute);
 
-                        generated.Add(storageTypeName);
+                        foreach (var listProxyGenericArgument in ListProxyGenericArguments)
+                        {
+                            var listTypeName = GetListTypeName(GetGluedTypeName(listProxyGenericArgument), true);
+
+                            if (definedCollectionTypeNames.Contains(listTypeName))
+                            {
+                                continue;
+                            }
+
+                            definedCollectionTypeNames.Add(listTypeName);
+                            
+                            ListType(listProxyGenericArgument);
+                        }
+
+                        foreach (var dictionaryProxyGenericArguments in DictionaryProxyGenericArguments)
+                        {
+                            var keyTypeName = dictionaryProxyGenericArguments.Key;
+                            var valueTypeName = dictionaryProxyGenericArguments.Value;
+                            var dictionaryTypeName = GetDictionaryTypeName(GetGluedTypeName(keyTypeName), GetGluedTypeName(valueTypeName), true);
+
+                            if (definedCollectionTypeNames.Contains(dictionaryTypeName))
+                            {
+                                continue;
+                            }
+
+                            definedCollectionTypeNames.Add(dictionaryTypeName);
+                            
+                            DictionaryType(keyTypeName, valueTypeName);
+                        }
+
+                        definedStorageTypeNames.Add(storageTypeName);
                     }
                 }
             });

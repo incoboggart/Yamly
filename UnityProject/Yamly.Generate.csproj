@@ -3,6 +3,9 @@
   <PropertyGroup>
     <LangVersion>6</LangVersion>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <DisableHandlePackageFileConflicts>true</DisableHandlePackageFileConflicts>
+    <_TargetFrameworkDirectories>non_empty_path_generated_by_rider_editor_plugin</_TargetFrameworkDirectories>
+    <_FullFrameworkReferenceAssemblyPaths>non_empty_path_generated_by_rider_editor_plugin</_FullFrameworkReferenceAssemblyPaths>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -51,6 +54,9 @@
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2018.1.9f2\Editor\Data\Managed/UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.1.9f2\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Microsoft.CSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +337,9 @@
     <Reference Include="Yamly">
       <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Assets/Yamly/Plugins/Yamly.dll</HintPath>
     </Reference>
+    <Reference Include="Yamly.Generated">
+      <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Assets/Yamly/Plugins/Yamly.Generated.dll</HintPath>
+    </Reference>
     <Reference Include="Yamly.Utility">
       <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Assets/Yamly/Plugins/Yamly.Utility.dll</HintPath>
     </Reference>
@@ -348,9 +357,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/0bogg/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Yamly.Generated">
-      <HintPath>C:/Users/0bogg/Documents/Boggart/Yamly-GitHub/UnityProject/Assets/Yamly/Plugins/Yamly.Generated.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2018.1.9f2/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -706,9 +712,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2018.1.9f2\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\Microsoft.CSharp.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 </Project>
